@@ -124,7 +124,7 @@ app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs');
 app.use(express.static("stylesheets"));
 app.get('/', (req, res) => res.render("pages/jobs"))
-app.get('/dev', (req, res) => res.render("html/dev"))
+app.get('/dev', (req, res) => res.render("html/dev.html"))
 app.get('/search', work)
 app.get('/add/:stock', addToDB)
 
