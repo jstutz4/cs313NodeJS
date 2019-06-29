@@ -5,7 +5,7 @@
   "main": "job.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "job.js"
+    "start": "node job.js"
   },
   "author": "",
   "license": "ISC",
