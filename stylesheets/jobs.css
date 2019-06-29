@@ -1,7 +1,8 @@
 body{
     background-color:aquamarine;
 }
-ul {
+
+ul{
     display: flex;
     list-style: none;
     margin: 5px 2px;
