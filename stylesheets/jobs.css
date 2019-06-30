@@ -1,5 +1,5 @@
 body{
-    background-color:aquamarine;
+    background-color:darkgrey;
 }
 
 ul{
@@ -7,4 +7,16 @@ ul{
     list-style: none;
     margin: 5px 2px;
     padding: 2px 2px;
+}
+table{
+    border: solid 2px blue;
+}
+
+table th {
+    border-bottom: solid 2px blue;
+}
+
+table td{
+    border:none;
+    padding:2px 5px;
 }

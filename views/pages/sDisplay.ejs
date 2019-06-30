@@ -1,4 +1,13 @@
-<%= header %>
-<%= data %>
-<%= footer %>
-
+<table>
+  <tr>
+    <th>Symbol</th>
+    <th>Price</th>
+    <th>Volume</th>
+  </tr>
+  <tr>
+    <td><%=data.symbol%></td>
+    <td>$<%=data.latestPrice%></td>
+    <td><%=((data.latestVolume/1000000).toFixed(2))%> (M)</td>
+  </tr>
+</table>
+<a href="https://iexcloud.io">Data provided by IEX Cloud</a>

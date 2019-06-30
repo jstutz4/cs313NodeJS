@@ -8,7 +8,7 @@ const app = express();
 'use strict';
 const request = require('request');
 var stream;
-const connnectionString = "proccess.env.DATABASE_URL" || "postgres://zdnuzfxqzfhohm:e53bf8dfe17ac91f9cb9251aa48d8c04870d8a0fc610d50688d7ae3811e87055@ec2-54-83-1-101.compute-1.amazonaws.com:5432/ddnco3fuqpje1b";
+const connnectionString = "postgres://stockdev:stockdev@localhost:5432/stockmanger";
 const pool = new Pool({ connectionString: connnectionString });
 
 function connect(search) {
@@ -31,7 +31,14 @@ function wait() {
 
 
 function work(req, res) {
-    const search = req.query.search;
+    //console.log("query " + isquery);
+    var search;
+    if (false) {
+        search = symbol;
+    } else {
+        search = req.query.search;
+    }
+    console.log("gettting val " + search);
     connect(search);
     if (typeof stream.symbol == "undefined") {
         //res.render("pages/errSymbol", { "err": search });
@@ -57,17 +64,16 @@ function work(req, res) {
     });
 
     stream.on('data', (response) => {
-        
+
         var str = response.toString();
         var obj = JSON.parse(str.replace('data:', ''));
         //console.log("watching " + obj.latestPrice);
-        console.log(obj == null);
+        //console.log(obj);
        
-        console.log("stop " + obj.symbol);
-        return;
+        //console.log("succuss " + obj);
         var hTable = "<table><tr><th>symbol</th><th>price</th><th>volume</th></tr>";
         var fTable = "</table>";
-        var sData = "<tr><td>under new management</td></tr>";
+        var sData = "<tr><td>what is goingon</td></tr>";
         /*
         fs.readfile("sResults.txt", "utf-8", (err, data) => {
             if (err) console.log(err);
@@ -79,9 +85,21 @@ function work(req, res) {
             console.log("Successfully Written to File.");
         });
         */
-        res.render("pages/sDisplay", { "data": sData, "header":hTable, "footer":fTable });
+     
+        res.render("pages/sDisplay", { "data": obj, "header":hTable, "footer":fTable });
     });
     wait();
+}
+
+function writeTable(obj) {
+    var hTable = "<table><tr><th>symbol</th><th>price</th><th>volume</th></tr>";
+    var fTable = "</table>";
+    var sData = "<tr><td>" + obj.symbol + "</td><td>" + obj.latestPrice+"</td><td>"+obj.latestVolume+"</td></tr>";
+    console.log(hTable + sData + fTable);
+}
+
+function updateLife(req, res) {
+    addToDB(req, res);
 }
 
 function addToDB(req, res) {
@@ -94,16 +112,37 @@ function addToDB(req, res) {
     });
     */
     getAllFromTable("stocks", "symbol", function (error, results) {
-        if (error || results == null ) console.log(error);
-        console.log("this is what we got :result", results);
-        res.render("pages/results", { "result": results });
+        if (error || results == null) console.log(error);
+        console.log("this is what we got :result", results.length);
+
+        addAllSymbols(results, function (results) {
+            console.log("stooping all stuff");
+
+            console.log("looking for all symbols");
+            console.log(results);
+            writeTable(results);
+        });
+        //res.render("pages/results", { "result": results[0] });
     });
+
     
+    
+}
+function addAllSymbols(array, callBack) {
+    var allSymbols = [];
+    let i = 0;
+    while (i < array.length - 1) {
+        allSymbols.push(work(null, null, true, array[i].symbol));
+        i = i + 1;
+        console.log(allSymbols);
+        isdone = true;
+    }
+    callBack(allSymbols);
 }
 function insertIntoTable(table, symbol, callBack) {
     console.log("inserting")
 
-    var sql = ("INSERT INTO " + table + " (user_id, symbol) VALUES ($1::int, $2::text")
+    var sql = ("INSERT INTO " + table + " (user_id, symbol) VALUES ($1::int, $2::text)")
     var params = [1, symbol]
     console.log(sql);
     pool.query(sql, params, function (error, result) {
@@ -123,6 +162,7 @@ function getAllFromTable(table, column, callBack) {
         if (error) console.log(error);
 
         console.log("found DB " + JSON.stringify(result.rows))
+        
         callBack(null, result.rows);
     });
 }
@@ -133,6 +173,6 @@ app.get('/', (req, res) => res.render("pages/jobs"))
 app.get('/errSymbol', (req, res) => res.render("pages/errSymbol"))
 
 app.get('/search', work)
-app.get('/add/:stock', addToDB)
+app.get('/add/:stock', updateLife)
 
 app.listen(PORT, () => console.log(`Listening on ${PORT}`))

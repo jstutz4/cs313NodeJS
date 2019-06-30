@@ -9,6 +9,7 @@ function apiSearch() {
         if (this.readyState == 4 && this.status == 200) {
 
             console.log(this.responseText)
+            document.getElementById("sTable").innerHTML = this.responseText;
         }
     }
     httpRequest.open("GET", url, true);
