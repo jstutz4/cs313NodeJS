@@ -32,8 +32,11 @@ function wait() {
 
 function work(req, res) {
     const search = req.query.search;
-    console.log('watching ' + search);
     connect(search);
+    if (typeof stream.symbol == "undefined") {
+        //res.render("pages/errSymbol", { "err": search });
+        //return;
+    }
     stream.on('socket', () => {
         console.log("Connected");
     });
@@ -58,7 +61,10 @@ function work(req, res) {
         var str = response.toString();
         var obj = JSON.parse(str.replace('data:', ''));
         //console.log("watching " + obj.latestPrice);
-        console.log(obj);
+        console.log(obj == null);
+       
+        console.log("stop " + obj.symbol);
+        return;
         var hTable = "<table><tr><th>symbol</th><th>price</th><th>volume</th></tr>";
         var fTable = "</table>";
         var sData = "<tr><td>under new management</td></tr>";
@@ -90,7 +96,7 @@ function addToDB(req, res) {
     getAllFromTable("stocks", "symbol", function (error, results) {
         if (error || results == null ) console.log(error);
         console.log("this is what we got :result", results);
-        res.json(results);
+        res.render("pages/results", { "result": results });
     });
     
 }
@@ -124,7 +130,8 @@ app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs');
 app.use(express.static("stylesheets"));
 app.get('/', (req, res) => res.render("pages/jobs"))
-app.get('/dev', (req, res) => res.render("html/dev.html"))
+app.get('/errSymbol', (req, res) => res.render("pages/errSymbol"))
+
 app.get('/search', work)
 app.get('/add/:stock', addToDB)
 
