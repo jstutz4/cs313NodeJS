@@ -30,7 +30,7 @@ function wait() {
 };
 
 
-function work(req, res) {
+function work(req, res, callBack) {
     //console.log("query " + isquery);
     var search;
     if (false) {
@@ -71,35 +71,59 @@ function work(req, res) {
         //console.log(obj);
        
         //console.log("succuss " + obj);
-        var hTable = "<table><tr><th>symbol</th><th>price</th><th>volume</th></tr>";
-        var fTable = "</table>";
+      
         var sData = "<tr><td>what is goingon</td></tr>";
+        //console.log(obj);
         /*
-        fs.readfile("sResults.txt", "utf-8", (err, data) => {
+        fs.readFile("sResults.txt", "html", (err, data) => {
             if (err) console.log(err);
             sData = sData + data;
         });
-        sData = sData + "<tr><td>"+obj[0].symbol+"</td><td>"+obj[0].lastSalePrice+"</td><td>"+obj[0].volume+"</td></tr>"
         fs.writeFile("sResults.txt", sData, (err) => {
             if (err) console.log(err);
             console.log("Successfully Written to File.");
         });
+        
         */
-     
-        res.render("pages/sDisplay", { "data": obj, "header":hTable, "footer":fTable });
+        const button = '<input type="button" name="' + obj.symbol + '" value="Track Stock">';
+        sData = "<tr><td>" + obj.symbol + "</td><td>" + obj.latestPrice + "</td><td>" + ((obj.latestVolume / 1000000).toFixed(2)) + "</td><td>"+button+"</td></tr>";
+        fs.appendFile('sResults.txt', sData, function (err) {
+            if (err) { console.log("writing file error"); console.log(err); }
+            console.log('Saved!');
+            callBack(res);
+        });
+
     });
     wait();
+
 }
 
 function writeTable(obj) {
     var hTable = "<table><tr><th>symbol</th><th>price</th><th>volume</th></tr>";
     var fTable = "</table>";
-    var sData = "<tr><td>" + obj.symbol + "</td><td>" + obj.latestPrice+"</td><td>"+obj.latestVolume+"</td></tr>";
+    var sData = "<\ tr \><\ td \>" + obj.symbol + "<\ /td \><td>" + obj.latestPrice+"</td><td>"+obj.latestVolume+"</td></tr>";
     console.log(hTable + sData + fTable);
 }
 
-function updateLife(req, res) {
-    addToDB(req, res);
+function updateSearch(req, res) {
+    var hTable = "<table><tr><th>symbol</th><th>price</th><th>volume</th><th>Track Stock</th></tr>";
+    var fTable = "</table>";
+    var sData;
+    work(req, res, getFile);
+}
+
+function getFile(res) {
+    var hTable = "<table><tr><th>symbol</th><th>price</th><th>volume</th><th>Track Stock</th></tr>";
+    var fTable = "</table>";
+    fs.readFile("sResults.txt", "utf-8", (err, data) => {
+        if (err) console.log(err);
+        console.log("reading file  ");
+        console.log(data);
+        res.render("pages/sDisplay", function () {
+            res.send(hTable + data + fTable);
+        });
+    });
+    
 }
 
 function addToDB(req, res) {
@@ -172,7 +196,7 @@ app.use(express.static("stylesheets"));
 app.get('/', (req, res) => res.render("pages/jobs"))
 app.get('/errSymbol', (req, res) => res.render("pages/errSymbol"))
 
-app.get('/search', work)
-app.get('/add/:stock', updateLife)
+app.get('/search', updateSearch)
+//app.get('/add/:stock', updateLife)
 
 app.listen(PORT, () => console.log(`Listening on ${PORT}`))
