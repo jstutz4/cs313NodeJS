@@ -107,7 +107,7 @@ function work(req, res, callBack, stock) {
         fs.appendFile('trackStocks.txt', sData, function (err) {
             if (err) { console.log("writing file error"); console.log(err); }
             console.log('trackStocks Saved!');
-            callBack(res);
+            //callBack(res);
         });  
     }
         
@@ -144,8 +144,8 @@ function updateStocks(req, res){
         getAllFromTable("stocks", "symbol", function(err, stocks){
             stocks.forEach(stock => {
                 console.log("getallfromtabel " + stock.symbol);
-            work(req, res,updateStocks, stock.symbol);
-            getStocks(req, res);
+            work(req, res,false, stock.symbol);
+            //getStocks(req, res);
             });
             console.log("calling get stocks callback");
             // repopulate the trackstocks with most recent data
