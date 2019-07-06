@@ -138,7 +138,7 @@ function updateStocks(req, res){
         console.log("Successfully Written to File.");
     }); 
     // add stock into db
-    const stock = res.params.stock;
+    var newStock = req.params.stock;
     //insertIntoTable("stocks",stock,function(req, res){
      // loop through the db and collect all the stock symbols
         getAllFromTable("stocks", "symbol", function(err, stocks){
