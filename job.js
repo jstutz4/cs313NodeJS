@@ -144,7 +144,7 @@ function updateStocks(req, res){
         getAllFromTable("stocks", "symbol", function(err, stocks){
             stocks.forEach(stock => {
                 console.log("getallfromtabel " + stock.symbol);
-            work(req, res,updateStocks, stock[0].symbol);
+            work(req, res,updateStocks, stock.symbol);
                 
             });
             console.log("calling get stocks callback");
