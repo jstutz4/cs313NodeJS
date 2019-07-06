@@ -8,7 +8,7 @@ const app = express();
 'use strict';
 const request = require('request');
 var stream;
-const connnectionString = "postgres://stockdev:stockdev@localhost:5432/stockmanger";
+const connnectionString = process.env.DATABASE_URL || "postgres://stockdev:stockdev@localhost:5432/stockmanger";
 const pool = new Pool({ connectionString: connnectionString });
 
 function connect(search) {
