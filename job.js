@@ -149,12 +149,12 @@ function updateStocks(req, res){
             });
             console.log("calling get stocks callback");
             // repopulate the trackstocks with most recent data
-            getStocks(res);
+            getStocks(req, res);
         });
     //});
 }
 
-function getStocks(res){
+function getStocks(req, res){
     var hTable = "<table><tr><th>symbol</th><th>price</th><th>volume</th><th>Action</th></tr>";
     var fTable = "</table>";
     fs.readFile("trackStocks.txt", "utf-8", (err, data) => {
