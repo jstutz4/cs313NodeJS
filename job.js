@@ -145,10 +145,11 @@ function updateStocks(req, res){
             stocks.forEach(stock => {
                 console.log("getallfromtabel " + stock.symbol);
             work(req, res,false, stock.symbol);
-            //getStocks(req, res);
             });
             console.log("calling get stocks callback");
             // repopulate the trackstocks with most recent data
+            getStocks(req, res);
+
         });
     //});
 }
