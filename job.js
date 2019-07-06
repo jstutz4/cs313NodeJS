@@ -138,7 +138,7 @@ function updateStocks(req, res){
         console.log("Successfully Written to File.");
     }); 
     // add stock into db
-    var newStock = req.params.stock;
+    var newStock = req.params.newstock;
     //insertIntoTable("stocks",stock,function(req, res){
      // loop through the db and collect all the stock symbols
         getAllFromTable("stocks", "symbol", function(err, stocks){
@@ -251,6 +251,6 @@ app.use(express.static("stylesheets"));
 app.get('/', (req, res) => res.render("pages/jobs"))
 app.get('/errSymbol', (req, res) => res.render("pages/errSymbol"))
 app.get('/search', updateSearch)
-app.get('/update/:stock', updateStocks)
+app.get('/update/:newstock', updateStocks)
 
 app.listen(PORT, () => console.log(`Listening on ${PORT}`))
