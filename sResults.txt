@@ -1,1 +1,2 @@
 <tr><td name="CTR">CTR</td><td name="CTR">9.58</td><td name="CTR">0.05</td><td><input type="button" name="CTR" value="Track Stock" onclick="trackStock(this)"></td></tr><tr><td name="JPM">JPM</td><td name="JPM">113.49</td><td name="JPM">7.93</td><td><input type="button" name="JPM" value="Track Stock" onclick="trackStock(this)"></td></tr>
+<tr><td name="JPM">JPM</td><td name="JPM">113.49</td><td name="JPM">7.93</td><td><input type="button" name="JPM" value="Track Stock" onclick="trackStock(this)"></td></tr>

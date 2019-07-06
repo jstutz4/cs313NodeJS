@@ -143,8 +143,8 @@ function updateStocks(req, res){
      // loop through the db and collect all the stock symbols
         getAllFromTable("stocks", "symbol", function(err, stocks){
             stocks.forEach(stock => {
-                console.log("getallfromtabel " + stock);
-            work(req, res,updateStocks, stock);
+                console.log("getallfromtabel " + stock[0].symbol);
+            work(req, res,updateStocks, ststock[0].symbol);
                 
             });
             console.log("calling get stocks callback");
