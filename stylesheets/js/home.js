@@ -5,13 +5,48 @@ function apiSearch() {
     console.log('searching:  ' + search);
     console.log('url:  ' + url);
     var httpRequest = new XMLHttpRequest();
+  
     httpRequest.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-
             console.log(this.responseText)
             document.getElementById("sTable").innerHTML = this.responseText;
+
         }
     }
     httpRequest.open("GET", url, true);
     httpRequest.send();
+}
+
+function updateStocks(newStock){
+    var url = '/update/' + newStock;
+    console.log('searching:  ' + newStock);
+    console.log('url:  ' + url);
+    var httpRequest = new XMLHttpRequest();
+  
+    httpRequest.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(this.responseText)
+            document.getElementById("iTable").innerHTML = this.responseText;
+
+        }
+    }
+    httpRequest.open("GET", url, true);
+    httpRequest.send();
+}
+
+function trackStock(button){
+    var id = button.getAttribute("name");
+    var row = document.getElementsByName(id);
+    var stock = row[0].innerHTML;
+    console.log(row[0].innerHTML);
+    console.log(row[1].innerHTML);
+    updateStocks(stock);
+}
+
+function investStock(button){
+    var id = button.getAttribute("class");
+    var row = document.getElementsByClassName(id);
+    console.log(row[0].innerHTML);
+    console.log(row[1].innerHTML);
+
 }
