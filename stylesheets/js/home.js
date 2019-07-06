@@ -11,6 +11,7 @@ function apiSearch() {
             console.log(this.responseText)
             document.getElementById("sTable").innerHTML = this.responseText;
 
+<<<<<<< HEAD
         }
     }
     httpRequest.open("GET", url, true);
@@ -28,6 +29,8 @@ function updateStocks(newStock){
             console.log(this.responseText)
             document.getElementById("iTable").innerHTML = this.responseText;
 
+=======
+>>>>>>> f5c00ae815b2b6ff3a26de89b981b6ebfe6abea8
         }
     }
     httpRequest.open("GET", url, true);

@@ -30,7 +30,11 @@ function wait() {
 };
 
 
+<<<<<<< HEAD
 function work(req, res, callBack, stock) {
+=======
+function work(req, res, callBack) {
+>>>>>>> f5c00ae815b2b6ff3a26de89b981b6ebfe6abea8
     //console.log("query " + isquery);
     var search;
     console.log(callBack);
@@ -92,6 +96,7 @@ function work(req, res, callBack, stock) {
         });
         
         */
+<<<<<<< HEAD
        if(callBack == getFile){
             const button = '<input type="button" name="' + obj.symbol + '" value="Track Stock" onclick="trackStock(this)">';
             sData = '<tr><td name="'+obj.symbol+'">' + obj.symbol + '</td><td name="'+obj.symbol+'">' + obj.latestPrice + '</td><td name="'+obj.symbol+'">' + ((obj.latestVolume / 1000000).toFixed(2)) + "</td><td>"+button+"</td></tr>";
@@ -111,6 +116,15 @@ function work(req, res, callBack, stock) {
         });  
     }
         
+=======
+        const button = '<input type="button" name="' + obj.symbol + '" value="Track Stock">';
+        sData = "<tr><td>" + obj.symbol + "</td><td>" + obj.latestPrice + "</td><td>" + ((obj.latestVolume / 1000000).toFixed(2)) + "</td><td>"+button+"</td></tr>";
+        fs.appendFile('sResults.txt', sData, function (err) {
+            if (err) { console.log("writing file error"); console.log(err); }
+            console.log('Saved!');
+            callBack(res);
+        });
+>>>>>>> f5c00ae815b2b6ff3a26de89b981b6ebfe6abea8
 
     });
     wait();
@@ -125,6 +139,7 @@ function writeTable(obj) {
 }
 
 function updateSearch(req, res) {
+<<<<<<< HEAD
     // var hTable = "<table><tr><th>symbol</th><th>price</th><th>volume</th><th>Track Stock</th></tr>";
     // var fTable = "</table>";
     // var sData;
@@ -165,6 +180,12 @@ function getStocks(res){
             res.send(hTable + data + fTable);
         });
     });
+=======
+    var hTable = "<table><tr><th>symbol</th><th>price</th><th>volume</th><th>Track Stock</th></tr>";
+    var fTable = "</table>";
+    var sData;
+    work(req, res, getFile);
+>>>>>>> f5c00ae815b2b6ff3a26de89b981b6ebfe6abea8
 }
 
 function getFile(res) {
@@ -250,7 +271,13 @@ app.set('view engine', 'ejs');
 app.use(express.static("stylesheets"));
 app.get('/', (req, res) => res.render("pages/jobs"))
 app.get('/errSymbol', (req, res) => res.render("pages/errSymbol"))
+<<<<<<< HEAD
 app.get('/search', updateSearch)
 app.get('/update/:stock', updateStocks)
+=======
+
+app.get('/search', updateSearch)
+//app.get('/add/:stock', updateLife)
+>>>>>>> f5c00ae815b2b6ff3a26de89b981b6ebfe6abea8
 
 app.listen(PORT, () => console.log(`Listening on ${PORT}`))
