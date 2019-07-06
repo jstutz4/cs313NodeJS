@@ -106,7 +106,7 @@ function work(req, res, callBack, stock) {
         sData = '<tr><td class="'+obj.symbol+'">' + obj.symbol + '</td><td class="'+obj.symbol+'">' + obj.latestPrice + '</td><td class="'+obj.symbol+'">' + ((obj.latestVolume / 1000000).toFixed(2)) + "</td><td>"+button+"</td></tr>";
         fs.appendFile('trackStocks.txt', sData, function (err) {
             if (err) { console.log("writing file error"); console.log(err); }
-            console.log('trackStocks Saved!');
+            console.log('trackStocks Saved!' + sData);
             //callBack(res);
         });  
     }
@@ -149,7 +149,6 @@ function updateStocks(req, res){
             console.log("calling get stocks callback");
             // repopulate the trackstocks with most recent data
             getStocks(req, res);
-
         });
     //});
 }
