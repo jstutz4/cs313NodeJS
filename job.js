@@ -137,7 +137,7 @@ function updateSearch(req, res) {
 
 function updateStocks(req, res){
     // clear trackstocks.txt file the info is still in the DB
-    fs.writeFile("trackStocks.txt", " ", (err) => {
+    fs.writeFile("trackStocks.txt", "", (err) => {
         if (err) console.log(err);
         console.log("Successfully Written to File.");
     }); 
