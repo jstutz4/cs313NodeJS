@@ -250,6 +250,6 @@ app.use(express.static("stylesheets"));
 app.get('/', (req, res) => res.render("pages/jobs"))
 app.get('/errSymbol', (req, res) => res.render("pages/errSymbol"))
 app.get('/search', updateSearch)
-app.get('/update/', updateStocks)
+app.get('/update', updateStocks)
 
 app.listen(PORT, () => console.log(`Listening on ${PORT}`))
