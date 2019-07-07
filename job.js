@@ -175,7 +175,7 @@ function getFile(res) {
         console.log("reading file  ");
         console.log(data);
         res.render("pages/sDisplay", function () {
-            res.send(hTable + data + fTable);
+            return(hTable + data + fTable);
         });
     });
     
