@@ -103,7 +103,7 @@ function work(req, res, callBack, stock, lastStock) {
         }
        else{
         const button = '<input type="button" class="' + obj.symbol + '" value="Invest" onclick="investStock(this)">';
-        sData = '<tr><td class="'+obj.symbol+'">' + obj.symbol + '</td><td class="'+obj.symbol+'">' + obj.latestPrice + '</td><td class="'+obj.symbol+'">' + ((obj.latestVolume / 1000000).toFixed(2)) + "</td><td>"+button+"</td></tr>";
+        sData = '<tr><td class="'+obj.symbol+'">' + obj.symbol + '</td><td class="'+obj.symbol+'">' + obj.latestPrice + '</td><td class="'+obj.symbol+'">' + ((obj.latestVolume / 1000000).toFixed(2)) + '</td><td><input name="' + obj.symbol+ '" type="decimal"></td><td>'+button+"</td></tr>";
         fs.appendFile('trackStocks.txt', sData, function (err) {
             if (err) { console.log("writing file error"); console.log(err); }
             console.log('trackStocks Saved!' + sData);
