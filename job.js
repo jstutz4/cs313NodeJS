@@ -107,7 +107,7 @@ function work(req, res, callBack, stock) {
         fs.appendFile('trackStocks.txt', sData, function (err) {
             if (err) { console.log("writing file error"); console.log(err); }
             console.log('trackStocks Saved!' + sData);
-            //callBack(res);
+            getFile(res);
         });  
     }
         
