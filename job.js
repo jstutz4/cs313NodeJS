@@ -142,19 +142,18 @@ function updateStocks(req, res){
     //insertIntoTable("stocks",stock,function(req, res){
      // loop through the db and collect all the stock symbols
         getAllFromTable("stocks", "symbol", function(err, stocks){
-            stocks.forEach(stock => {
-                console.log("getallfromtabel " + stock.symbol);
-            work(req, res,false, stock.symbol);
-            });
-            
+            getStocks(req, res, stocks, function(){
+                displayStocks(req, res);
+            })
         });
-        console.log("calling get stocks callback");
-            // repopulate the trackstocks with most recent data
-            getStocks(req, res);
     //});
 }
-
-function getStocks(req, res){
+function getStocks(req, res, array){
+    array.forEach(function(stock){
+        work(req, res,false,stock);
+    })
+}
+function displayStocks(req, res){
     var hTable = "<table><tr><th>symbol</th><th>price</th><th>volume</th><th>Action</th></tr>";
     var fTable = "</table>";
     fs.readFile("trackStocks.txt", "utf-8", (err, data) => {
