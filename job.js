@@ -155,7 +155,7 @@ function getStocks(req, res, array){
 
     for(let i = 0; i < array.length; i++){
         console.log("***** " + array[i].symbol);
-        if(i == array.length){
+        if(i == array.length -1){
             work(req, res, displayStocks, array[i].symbol,true);
         }
         else{
