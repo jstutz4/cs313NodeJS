@@ -163,6 +163,7 @@ function displayStocks(res){
         console.log(data);
         res.render("pages/sDisplay", function () {
             res.send(hTable + data + fTable);
+            wait();
         });
     });
 }
@@ -175,7 +176,8 @@ function getFile(res) {
         console.log("reading file  ");
         console.log(data);
         res.render("pages/sDisplay", function () {
-            return(hTable + data + fTable);
+            res.send(hTable + data + fTable);
+            wait();
         });
     });
     
