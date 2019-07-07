@@ -107,6 +107,7 @@ function work(req, res, callBack, stock) {
         fs.appendFile('trackStocks.txt', sData, function (err) {
             if (err) { console.log("writing file error"); console.log(err); }
             console.log('trackStocks Saved!' + sData);
+            wait();
             displayStocks(res);
         });  
     }
@@ -145,13 +146,14 @@ function updateStocks(req, res){
         getAllFromTable("stocks", "symbol", function(err, stocks){
             getStocks(req, res, stocks, function(){
                 //displayStocks(req, res);
-                getFile(res);
+                //getFile(res);
             })
         });
     });
 }
 function getStocks(req, res, array){
     array.forEach(function(stock){
+        wait();
         work(req, res,false,stock.symbol);
     })
 }
