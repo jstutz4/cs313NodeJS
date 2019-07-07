@@ -152,17 +152,16 @@ function updateStocks(req, res){
     });
 }
 function getStocks(req, res, array){
-    var i = 0;
-    array.forEach(function(stock){
-        if(i >= array.length){
-        work(req, res,false,stock.symbol, true);
 
+    for(let i = 0; i < array.length; i++){
+        console.log(array[i].symbol);
+        if(i+1 == array.length){
+            work(req, res, displayStocks, array[i].symbol,true);
         }
         else{
-        work(req, res,false,stock.symbol, false);
+            work(req, res, displayStocks, array[i].symbol, false);
         }
-        i++;
-    })
+    }
 }
 function displayStocks(res){
     var hTable = "<table><tr><th>symbol</th><th>price</th><th>volume</th><th>Action</th></tr>";
