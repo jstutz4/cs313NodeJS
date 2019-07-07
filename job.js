@@ -144,10 +144,7 @@ function updateStocks(req, res){
     insertIntoTable("stocks",newStock,function(){
      // loop through the db and collect all the stock symbols
         getAllFromTable("stocks", "symbol", function(err, stocks){
-            getStocks(req, res, stocks, function(){
-                //displayStocks(req, res);
-                //getFile(res);
-            })
+            getStocks(req, res, stocks);
         });
     });
 }
