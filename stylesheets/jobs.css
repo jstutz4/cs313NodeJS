@@ -20,3 +20,7 @@ table td{
     border:none;
     padding:2px 5px;
 }
+
+input[type="decimal"]{
+    width: 70px;;
+}
