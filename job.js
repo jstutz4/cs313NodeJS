@@ -97,7 +97,7 @@ function work(req, res, callBack, stock) {
             sData = '<tr><td name="'+obj.symbol+'">' + obj.symbol + '</td><td name="'+obj.symbol+'">' + obj.latestPrice + '</td><td name="'+obj.symbol+'">' + ((obj.latestVolume / 1000000).toFixed(2)) + "</td><td>"+button+"</td></tr>";
             fs.appendFile('sResults.txt', sData, function (err) {
                 if (err) { console.log("writing file error"); console.log(err); }
-                console.log('sResults saved!');
+                console.log('sResults saved!' + sData);
                 callBack(res);
             });
         }
