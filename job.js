@@ -30,7 +30,7 @@ function wait() {
 };
 
 
-function work(req, res, callBack, stock) {
+function work(req, res, callBack, stock, lastStock) {
     //console.log("query " + isquery);
     var search;
     console.log(callBack);
@@ -108,7 +108,10 @@ function work(req, res, callBack, stock) {
             if (err) { console.log("writing file error"); console.log(err); }
             console.log('trackStocks Saved!' + sData);
             wait();
-            displayStocks(res);
+            if(lastStock){
+                console.log("last STock");
+                displayStocks(res);
+            }
         });  
     }
         
@@ -149,9 +152,16 @@ function updateStocks(req, res){
     });
 }
 function getStocks(req, res, array){
+    var i = 0;
     array.forEach(function(stock){
-        wait();
-        work(req, res,false,stock.symbol);
+        if(i >= array.length){
+        work(req, res,false,stock.symbol, true);
+
+        }
+        else{
+        work(req, res,false,stock.symbol, false);
+        }
+        i++;
     })
 }
 function displayStocks(res){
@@ -163,7 +173,6 @@ function displayStocks(res){
         console.log(data);
         res.render("pages/sDisplay", function () {
             res.send(hTable + data + fTable);
-            return;
         });
     });
 }
@@ -177,7 +186,6 @@ function getFile(res) {
         console.log(data);
         res.render("pages/sDisplay", function () {
             res.send(hTable + data + fTable);
-            return;
         });
     });
     
