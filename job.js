@@ -231,7 +231,7 @@ function insertIntoTable(table, symbol, callBack) {
         if (error) console.log(error);
 
         console.log("found DB " + JSON.stringify(result.rows))
-        //callBack(null, result.rows);
+        callBack();
     });
 }
 function getAllFromTable(table, column, callBack) {
