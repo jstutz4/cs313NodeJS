@@ -150,7 +150,7 @@ function updateStocks(req, res){
 }
 function getStocks(req, res, array){
     array.forEach(function(stock){
-        work(req, res,false,stock);
+        work(req, res,false,stock.symbol);
     })
 }
 function displayStocks(req, res){
