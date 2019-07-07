@@ -18,7 +18,7 @@ function apiSearch() {
 }
 
 function updateStocks(newStock){
-    var url = '/update/?newStock=' + newStock;
+    var url = '/update?newStock=' + newStock;
     console.log('searching:  ' + newStock);
     console.log('url:  ' + url);
     var httpRequest = new XMLHttpRequest();

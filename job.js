@@ -154,7 +154,7 @@ function getStocks(req, res, array){
         work(req, res,false,stock.symbol);
     })
 }
-function displayStocks(req, res){
+function displayStocks(res){
     var hTable = "<table><tr><th>symbol</th><th>price</th><th>volume</th><th>Action</th></tr>";
     var fTable = "</table>";
     fs.readFile("trackStocks.txt", "utf-8", (err, data) => {
