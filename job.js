@@ -133,7 +133,7 @@ function updateSearch(req, res) {
 
 function updateStocks(req, res){
     // clear trackstocks.txt file the info is still in the DB
-    fs.writeFile("trackStocks.txt", "", (err) => {
+    fs.writeFile("trackStocks.txt", " ", (err) => {
         if (err) console.log(err);
         console.log("Successfully Written to File.");
     }); 
@@ -143,7 +143,8 @@ function updateStocks(req, res){
      // loop through the db and collect all the stock symbols
         getAllFromTable("stocks", "symbol", function(err, stocks){
             getStocks(req, res, stocks, function(){
-                displayStocks(req, res);
+                //displayStocks(req, res);
+                getFile(res);
             })
         });
     //});
