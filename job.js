@@ -138,7 +138,8 @@ function updateStocks(req, res){
         console.log("Successfully Written to File.");
     }); 
     // add stock into db
-   // var newStock = req.query.newStock;
+    var newStock = req.query.newStock;
+    console.log(newStock + " helping");
     //insertIntoTable("stocks",stock,function(req, res){
      // loop through the db and collect all the stock symbols
         getAllFromTable("stocks", "symbol", function(err, stocks){
