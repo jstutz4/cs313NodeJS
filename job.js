@@ -140,7 +140,7 @@ function updateStocks(req, res){
     // add stock into db
     var newStock = req.query.newStock;
     console.log(newStock + " helping");
-    //insertIntoTable("stocks",stock,function(req, res){
+    insertIntoTable("stocks",newStock,function(req, res){
      // loop through the db and collect all the stock symbols
         getAllFromTable("stocks", "symbol", function(err, stocks){
             getStocks(req, res, stocks, function(){
@@ -148,7 +148,7 @@ function updateStocks(req, res){
                 getFile(res);
             })
         });
-    //});
+    });
 }
 function getStocks(req, res, array){
     array.forEach(function(stock){
@@ -231,7 +231,7 @@ function insertIntoTable(table, symbol, callBack) {
         if (error) console.log(error);
 
         console.log("found DB " + JSON.stringify(result.rows))
-        callBack(null, result.rows);
+        //callBack(null, result.rows);
     });
 }
 function getAllFromTable(table, column, callBack) {
