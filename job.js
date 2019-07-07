@@ -140,7 +140,7 @@ function updateStocks(req, res){
     // add stock into db
     var newStock = req.query.newStock;
     console.log(newStock + " helping");
-    insertIntoTable("stocks",newStock,function(req, res){
+    insertIntoTable("stocks",newStock,function(){
      // loop through the db and collect all the stock symbols
         getAllFromTable("stocks", "symbol", function(err, stocks){
             getStocks(req, res, stocks, function(){
