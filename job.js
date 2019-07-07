@@ -146,10 +146,11 @@ function updateStocks(req, res){
                 console.log("getallfromtabel " + stock.symbol);
             work(req, res,false, stock.symbol);
             });
-            console.log("calling get stocks callback");
+            
+        });
+        console.log("calling get stocks callback");
             // repopulate the trackstocks with most recent data
             getStocks(req, res);
-        });
     //});
 }
 
