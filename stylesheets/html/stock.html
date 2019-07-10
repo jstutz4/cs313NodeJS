@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<%- include("../partials/jobsHeader.ejs") %>
+    <meta charset="utf-8" />
+    <title>Jobs</title>
+    <link rel="stylesheet" type="text/css" href="/jobs.css" />
+    <script type="text/javascript" src="/js/home.js"></script>        
 </head>
 <body>
 <h1>Stock Look Up</h1>
@@ -11,11 +14,9 @@
 <li> <input type="button" name="search_jon_sub" value="search" onclick="apiSearch()"></li>
 </ul>
 </div>
-<table><tr><th>symbol</th><th>price</th><th>volume</th><th>Amount</th><th>Action</th></tr>
 <div id = "sTable">
 
 </div>
-</table>
 <a href="https://iexcloud.io">Data provided by IEX Cloud</a>
 <div id="iTable">
 </div>

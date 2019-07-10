@@ -2,14 +2,18 @@ const express = require("express");
 const path = require("path");
 const url = require("url");
 const fs = require("fs");
-const { Pool } = require("pg");
+const {
+    Pool
+} = require("pg");
 const PORT = process.env.PORT || 8100;
 const app = express();
 'use strict';
 const request = require('request');
 var stream;
 const connnectionString = process.env.DATABASE_URL || "postgres://stockdev:stockdev@localhost:5432/stockmanger";
-const pool = new Pool({ connectionString: connnectionString });
+const pool = new Pool({
+    connectionString: connnectionString
+});
 
 function connect(search) {
     const TOKEN = 'sk_b5530272bb59484ca109ca4c5e819852';
@@ -66,7 +70,7 @@ function work(req, res, callBack, stock, lastStock) {
 
     stream.on('data', (response) => {
         var str = response.toString();
-        if(str == "Not Found" || str == "Unknown symbol"){
+        if (str == "Not Found" || str == "Unknown symbol") {
             console.log("reporting " + response.toString());
             //response.return;
             //connect();
@@ -76,9 +80,9 @@ function work(req, res, callBack, stock, lastStock) {
         var obj = JSON.parse(str.replace('data:', ''));
         //console.log("watching " + obj.latestPrice);
         //console.log(obj);
-       
+
         //console.log("succuss " + obj);
-      
+
         var sData = "<tr><td>what is goingon</td></tr>";
         //console.log(obj);
         /*
@@ -92,29 +96,26 @@ function work(req, res, callBack, stock, lastStock) {
         });
         
         */
-       if(callBack == getFile){
-            const button = '<input type="button" name="' + obj.symbol + '" value="Track Stock" onclick="trackStock(this)">';
-            sData = '<tr><td name="'+obj.symbol+'">' + obj.symbol + '</td><td name="'+obj.symbol+'">' + obj.latestPrice + '</td><td name="'+obj.symbol+'">' + ((obj.latestVolume / 1000000).toFixed(2)) + "</td><td>"+button+"</td></tr>";
-            fs.appendFile('sResults.txt', sData, function (err) {
-                if (err) { console.log("writing file error"); console.log(err); }
-                console.log('sResults saved!' + sData);
-                callBack(res);
+        if (callBack == getFile) {
+           
+            callBack(res, obj);
+        } else {
+            const button = '<input type="button" class="' + obj.symbol + '" value="Invest" onclick="investStock(this)">';
+            sData = '<tr><td class="' + obj.symbol + '">' + obj.symbol + '</td><td class="' + obj.symbol + '">' + obj.latestPrice + '</td><td class="' + obj.symbol + '">' + ((obj.latestVolume / 1000000).toFixed(2)) + '</td><td><input name="' + obj.symbol + '" type="decimal"></td><td>' + button + "</td></tr>";
+            fs.appendFile('trackStocks.txt', sData, function (err) {
+                if (err) {
+                    console.log("writing file error");
+                    console.log(err);
+                }
+                console.log('trackStocks Saved!' + sData);
+                wait();
+                if (lastStock) {
+                    console.log("last STock");
+                    displayStocks(res);
+                }
             });
         }
-       else{
-        const button = '<input type="button" class="' + obj.symbol + '" value="Invest" onclick="investStock(this)">';
-        sData = '<tr><td class="'+obj.symbol+'">' + obj.symbol + '</td><td class="'+obj.symbol+'">' + obj.latestPrice + '</td><td class="'+obj.symbol+'">' + ((obj.latestVolume / 1000000).toFixed(2)) + '</td><td><input name="' + obj.symbol+ '" type="decimal"></td><td>'+button+"</td></tr>";
-        fs.appendFile('trackStocks.txt', sData, function (err) {
-            if (err) { console.log("writing file error"); console.log(err); }
-            console.log('trackStocks Saved!' + sData);
-            wait();
-            if(lastStock){
-                console.log("last STock");
-                displayStocks(res);
-            }
-        });  
-    }
-        
+
 
     });
     wait();
@@ -124,7 +125,7 @@ function work(req, res, callBack, stock, lastStock) {
 function writeTable(obj) {
     var hTable = "<table><tr><th>symbol</th><th>price</th><th>volume</th></tr>";
     var fTable = "</table>";
-    var sData = "<\ tr \><\ td \>" + obj.symbol + "<\ /td \><td>" + obj.latestPrice+"</td><td>"+obj.latestVolume+"</td></tr>";
+    var sData = "<\ tr \><\ td \>" + obj.symbol + "<\ /td \><td>" + obj.latestPrice + "</td><td>" + obj.latestVolume + "</td></tr>";
     console.log(hTable + sData + fTable);
 }
 
@@ -135,35 +136,36 @@ function updateSearch(req, res) {
     work(req, res, getFile);
 }
 
-function updateStocks(req, res){
+function updateStocks(req, res) {
     // clear trackstocks.txt file the info is still in the DB
     fs.writeFile("trackStocks.txt", "", (err) => {
         if (err) console.log(err);
         console.log("Successfully Written to File.");
-    }); 
+    });
     // add stock into db
     var newStock = req.query.newStock;
     console.log(newStock + " helping");
-    insertIntoTable("stocks",newStock,function(){
-     // loop through the db and collect all the stock symbols
-        getAllFromTable("stocks", "symbol", function(err, stocks){
+    insertIntoTable("stocks", newStock, function () {
+        // loop through the db and collect all the stock symbols
+        getAllFromTable("stocks", "symbol", function (err, stocks) {
             getStocks(req, res, stocks);
         });
     });
 }
-function getStocks(req, res, array){
 
-    for(let i = 0; i < array.length; i++){
+function getStocks(req, res, array) {
+
+    for (let i = 0; i < array.length; i++) {
         console.log("***** " + array[i].symbol);
-        if(i == array.length -1){
-            work(req, res, displayStocks, array[i].symbol,true);
-        }
-        else{
+        if (i == array.length - 1) {
+            work(req, res, displayStocks, array[i].symbol, true);
+        } else {
             work(req, res, displayStocks, array[i].symbol, false);
         }
     }
 }
-function displayStocks(res){
+
+function displayStocks(res) {
     var hTable = "<table><tr><th>symbol</th><th>price</th><th>volume</th><th>Amount</th><th>Action</th></tr>";
     var fTable = "</table>";
     fs.readFile("trackStocks.txt", "utf-8", (err, data) => {
@@ -176,18 +178,10 @@ function displayStocks(res){
     });
 }
 
-function getFile(res) {
-    var hTable = "<table><tr><th>symbol</th><th>price</th><th>volume</th><th>Track Stock</th></tr>";
-    var fTable = "</table>";
-    fs.readFile("sResults.txt", "utf-8", (err, data) => {
-        if (err) console.log(err);
-        console.log("reading file  ");
-        console.log(data);
-        res.render("pages/sDisplay", function () {
-            res.send(hTable + data + fTable);
-        });
-    });
-    
+function getFile(res, obj) {
+    console.log('got obj ');
+    console.log(obj);
+  res.render("pages/sDisplay", {'row':JSON.stringify(obj)});
 }
 
 function addToDB(req, res) {
@@ -213,9 +207,10 @@ function addToDB(req, res) {
         //res.render("pages/results", { "result": results[0] });
     });
 
-    
-    
+
+
 }
+
 function addAllSymbols(array, callBack) {
     var allSymbols = [];
     let i = 0;
@@ -227,6 +222,7 @@ function addAllSymbols(array, callBack) {
     }
     callBack(allSymbols);
 }
+
 function insertIntoTable(table, symbol, callBack) {
     console.log("inserting")
 
@@ -240,24 +236,25 @@ function insertIntoTable(table, symbol, callBack) {
         callBack();
     });
 }
+
 function getAllFromTable(table, column, callBack) {
     console.log("geting")
 
-    var sql = ("SELECT symbol FROM "+ table +" WHERE user_id = $1::int")
+    var sql = ("SELECT symbol FROM " + table + " WHERE user_id = $1::int")
     var params = [1]
     console.log(sql);
     pool.query(sql, params, function (error, result) {
         if (error) console.log(error);
 
         console.log("found DB " + JSON.stringify(result.rows))
-        
+
         callBack(null, result.rows);
     });
 }
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs');
 app.use(express.static("stylesheets"));
-app.get('/', (req, res) => res.render("pages/jobs"))
+app.get('/', (req, res) => res.render("html/stock"))
 app.get('/errSymbol', (req, res) => res.render("pages/errSymbol"))
 app.get('/search', updateSearch)
 app.get('/update', updateStocks)
