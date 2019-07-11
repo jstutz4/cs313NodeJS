@@ -137,20 +137,12 @@ function updateSearch(req, res) {
 }
 
 function updateStocks(req, res) {
-    // clear trackstocks.txt file the info is still in the DB
-    fs.writeFile("trackStocks.txt", "", (err) => {
-        if (err) console.log(err);
-        console.log("Successfully Written to File.");
-    });
-    // add stock into db
-    var newStock = req.query.newStock;
-    console.log(newStock + " helping");
-    insertIntoTable("stocks", newStock, function () {
-        // loop through the db and collect all the stock symbols
-        getAllFromTable("stocks", "symbol", function (err, stocks) {
-            getStocks(req, res, stocks);
-        });
-    });
+    console.log('server says');
+    //console.log({'symbol':req.query.symbol, 'numStocks':req.query.numStocks, 'amount': req.query.amount});
+    var params = [1, req.query.symbol, req.query.numStocks, req.query.amount];
+     insertIntoTable('stocks', params, function(req, res){
+         res.render("pages/sDisplay", {'row':'we have inserted well'} );
+     });
 }
 
 function getStocks(req, res, array) {
@@ -223,11 +215,11 @@ function addAllSymbols(array, callBack) {
     callBack(allSymbols);
 }
 
-function insertIntoTable(table, symbol, callBack) {
+function insertIntoTable(table, params, callBack) {
     console.log("inserting")
 
-    var sql = ("INSERT INTO " + table + " (user_id, symbol) VALUES ($1::int, $2::text)")
-    var params = [1, symbol]
+    var sql = ("INSERT INTO " + table + " (user_id, symbol, numstocks, amount) VALUES ($1::int, $2::text, $3::float, $4::float)")
+    
     console.log(sql);
     pool.query(sql, params, function (error, result) {
         if (error) console.log(error);

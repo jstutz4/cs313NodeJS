@@ -16,18 +16,27 @@
 </div>
 <div id = "sTable">
         <table><tr><th>symbol</th><th>price</th><th>volume</th><th>Action</th></tr>
-        <tr class="abc"><td name="IBM">IBM</td><td name="IBM">140.57</td><td name="IBM">2.55</td><td><input type="button" name="IBM" value="Track Stock" onclick="trackStock(this)"></td></tr>
-        <tr class="IBM"><td name="IBM">IBM</td><td name="IBM">140.57</td><td name="IBM">2.55</td><td><input type="button" name="IBM" value="Track Stock" onclick="trackStock(this)"></td></tr>
+        
 </table>
 </div>
 <a href="https://iexcloud.io">Data provided by IEX Cloud</a>
-<input type="button" onclick="displayTable('IBM')">
+<div>
 <table>
     <thead>
-        <tr><th>symbol</th><th>price</th><th>volume</th><th>Amount</th><th>Action</th></tr>
+        <table><tr><th>symbol</th><th>price</th><th>volume (M)</th><th>High</th><th>Low</th><th>Change (%)</th><th>Amount</th><th>Action</th></tr>
     </thead>
-    <tbody id="iTable">
+    <tbody id="tTable">
     </tbody>
 </table>
+</div>
+<div>
+    <table>
+        <thead>
+            <table><tr><th>symbol</th><th>price</th><th>volume (M)</th><th>High</th><th>Low</th><th>Change (%)</th><th>Amount</th><th>Action</th></tr>
+        </thead>
+        <tbody id="iTable">
+        </tbody>
+    </table>
+</div>
 </body>
 </html>

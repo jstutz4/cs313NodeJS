@@ -31,13 +31,13 @@ function getAllStock(stock) {
 
     var stringObj;
     var obj;
-    var table = document.getElementById('iTable').innerHTML;
+    var table = document.getElementById('tTable').innerHTML;
     var button;
     var symbol_list = "";
     var length;
     var i = 0;
-    if(document.getElementById('iTable').children != null){
-        symbol_list = document.getElementById('iTable').children;
+    if(document.getElementById('tTable').children != null){
+        symbol_list = document.getElementById('tTable').children;
     }
   
     console.log(symbol_list)
@@ -74,27 +74,27 @@ function getAllStock(stock) {
         //runInNewContext();
     }
     console.log("**table ** " + table);
-    document.getElementById("iTable").innerHTML = table;
+    document.getElementById("tTable").innerHTML = table;
 }
 
 function searchStock(obj) {
-    var hTable = '<table><tr><th>symbol</th><th>price</th><th>volume</th><th>Action</th></tr>';
+    var hTable = '<table><tr><th>symbol</th><th>price</th><th>volume (M)</th><th>High</th><th>Low</th><th>Change (%)</th><th>Action</th></tr>';
     var table = "";
     var fTable = '</table>';
     var button = '<input type="button" name="' + obj.symbol + '" value="Track Stock" onclick="trackStock(this)">';
-    table = '<tr class=' + obj.symbol + '"><td name="' + obj.symbol + '">' + obj.symbol + '</td><td name="' + obj.symbol + '">' + obj.latestPrice + '</td><td name="' + obj.symbol + '">' + ((obj.latestVolume / 1000000).toFixed(2)) + "</td><td>" + button + "</td></tr>";
+    table = '<tr class=' + obj.symbol + '"><td name="' + obj.symbol + '">' + obj.symbol + '</td><td name="' + obj.symbol + '">$ ' + obj.latestPrice + '</td><td name="' + obj.symbol + '">' + ((obj.latestVolume / 1000000).toFixed(2)) + '</td><td>$ '+ obj.high+'</td><td>$ '+obj.low+'</td><td>'+(obj.changePercent*100).toFixed(3)+' %</td><td>' + button + "</td></tr>";
     document.getElementById("sTable").innerHTML = hTable + table + fTable;
 }
 
 function displayTable(obj) {
 
-    var hTable = '<table><tr><th>symbol</th><th>price</th><th>volume</th><th>Action</th></tr>';
-    var table = document.getElementById('iTable').innerHTML;
+    var hTable = '';
+    var table = document.getElementById('tTable').innerHTML;
     var fTable = '</table>';
-    button = '<input type="button" name="' + obj.symbol + '" value="Track Stock" onclick="investStock(this)">';
-    table += '<tr class=' + obj.symbol + '"><td name="' + obj.symbol + '">' + obj.symbol + '</td><td name="' + obj.symbol + '">' + obj.latestPrice + '</td><td name="' + obj.symbol + '">' + ((obj.latestVolume / 1000000).toFixed(2)) + '</td><td><input type="decimal" name="'+obj.symbol+'"></td><td>' + button + "</td></tr>";
+    button = '<input type="button" name="' + obj.symbol + '" value="Invest Stock" onclick="investStock(this)">';
+    table += '<tr class=' + obj.symbol + '"><td name="' + obj.symbol + '">' + obj.symbol + '</td><td name="' + obj.symbol + '">$' + obj.latestPrice + '</td><td name="' + obj.symbol + '">' + ((obj.latestVolume / 1000000).toFixed(2)) + '</td><td>$'+ obj.high+'</td><td>$'+obj.low+'</td><td>'+(obj.changePercent*100).toFixed(3)+'%</td><td><input id="price'+obj.symbol+ '" placeholder="$100" type="decimal" name="'+obj.symbol+'"></td><td>' + button + "</td></tr>";
 
-    document.getElementById("iTable").innerHTML = table;
+    document.getElementById("tTable").innerHTML = table;
 }
 
 function updateStocks(newStock) {
@@ -106,7 +106,7 @@ function updateStocks(newStock) {
     httpRequest.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             console.log(this.responseText)
-            document.getElementById("iTable").innerHTML = this.responseText;
+            document.getElementById("tTable").innerHTML = this.responseText;
 
         }
     }
@@ -124,9 +124,53 @@ function trackStock(button) {
 }
 
 function investStock(button) {
-    var id = button.getAttribute("class");
-    var row = document.getElementsByClassName(id);
-    console.log(row[0].innerHTML);
-    console.log(row[1].innerHTML);
+    var id = button.getAttribute("name");
+    var row = document.getElementById('price'+id);
+    apiSearch(id, getInvest);
+
+}
+
+function getInvest(obj){
+    var amount = document.getElementById("price"+obj.symbol).value;
+    var numStocks = (amount/(obj.latestPrice).toFixed(3)).toFixed(3);
+    var symbol = obj.symbol;
+    //get information
+    // re-calulate information
+    // insert it into the db
+    //then display table
+    console.log("num Stocks: " + numStocks);
+    console.log("amount invested: " + amount);
+    insertStock({'symbol': symbol, 'numStocks':numStocks, 'amount':amount});
+}
+
+function retriveStock(stock){
+
+}
+
+function insertStock(params){
+    console.log("listing info to insert into db");
+    console.log(params.symbol);
+    console.log(params.numStocks);
+    console.log(params.amount);
+    var url = '/update?amount=' + params.amount + '&numStocks=' + params.numStocks +'&symbol=' + params.symbol;
+
+    var httpRequest = new XMLHttpRequest();
+
+    httpRequest.onreadystatechange = function () {
+        var row = JSON.parse(this.responseText);
+        displayInvest(obj);
+    }
+    httpRequest.open("GET", url, true);
+    httpRequest.send();
+}
+
+function displayInvest(obj){
+    var data = document.getElementById('iTable').innerHTML;
+    console.log('out put from the db');
+    console.log(obj.symbol);
+    console.log(obj.numStocks);
+    console.log(obj.amount);
+
+
 
 }
