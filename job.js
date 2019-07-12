@@ -133,7 +133,11 @@ function updateSearch(req, res) {
     // var hTable = "<table><tr><th>symbol</th><th>price</th><th>volume</th><th>Track Stock</th></tr>";
     // var fTable = "</table>";
     // var sData;
-    work(req, res, getFile);
+    //work(req, res, getFile);
+
+    insertIntoTable('stockstracked', req.query.stock, function(){
+        res.render('pages/sDisplay', {'row': 'We have inserted into the tracked db'});
+    });
 }
 
 function updateStocks(req, res) {
@@ -243,12 +247,21 @@ function getAllFromTable(table, column, callBack) {
         callBack(null, result.rows);
     });
 }
+
+function readAllFromTable(req, res){
+    const table = req.query.table
+    getAllFromTable(table,'symbol', function(result){
+        res.render('pages/sDisplay', {'row': result});
+    });
+}
+
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs');
 app.use(express.static("stylesheets"));
 app.get('/', (req, res) => res.render("html/stock"))
 app.get('/errSymbol', (req, res) => res.render("pages/errSymbol"))
-app.get('/search', updateSearch)
+app.get('/insert', updateSearch)
 app.get('/update', updateStocks)
+app.get('/read', readAllFromTable)
 
 app.listen(PORT, () => console.log(`Listening on ${PORT}`))

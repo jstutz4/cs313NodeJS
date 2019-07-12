@@ -27,7 +27,7 @@ function getSearch() {
     apiSearch(search, searchStock);
 }
 
-function getAllStock(stock) {
+function getAllStock(stock, array) {
 
     var stringObj;
     var obj;
@@ -36,20 +36,26 @@ function getAllStock(stock) {
     var symbol_list = "";
     var length;
     var i = 0;
-    if(document.getElementById('tTable').children != null){
-        symbol_list = document.getElementById('tTable').children;
+    if(array != null && array != 'undefined'){
+        length = array.length;
+        i= -1;
+    }else{
+        if(document.getElementById('tTable').children != null){
+            symbol_list = document.getElementById('tTable').children;
+        }
+        console.log(symbol_list)
+        console.log('look at i ');
+        console.log(symbol_list.length);
+        if(symbol_list.length == 0){
+            length = 0;
+            i = -1;
+        }else{
+            length = symbol_list.length;
+            i = -1;
+        }
     }
   
-    console.log(symbol_list)
-    console.log('look at i ');
-    console.log(symbol_list.length);
-    if(symbol_list.length == 0){
-        length = 0;
-        i = -1;
-    }else{
-        length = symbol_list.length;
-        i = -1;
-    }
+    
     for (let j = i; j < length; j++) {
         console.log('i: ' + i + " j: " + j);
         if (j == -1) {
@@ -120,6 +126,19 @@ function trackStock(button) {
     var stock = row[0].innerHTML;
     console.log(row[0].innerHTML);
     console.log(row[1].innerHTML);
+    var url = '/insert?stock=' + stock;
+    var httpRequest = new XMLHttpRequest();
+    //inserting into the db
+    httpRequest.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(this.responseText)
+            
+            //document.getElementById("tTable").innerHTML = this.responseText;
+
+        }
+    }
+    httpRequest.open("GET", url, true);
+    httpRequest.send();
     getAllStock(stock);
 }
 
@@ -170,7 +189,19 @@ function displayInvest(obj){
     console.log(obj.symbol);
     console.log(obj.numStocks);
     console.log(obj.amount);
+}
 
+function getStocksTracked(){
+    var url = '/update?amount=' + params.amount + '&numStocks=' + params.numStocks +'&symbol=' + params.symbol;
 
+    var httpRequest = new XMLHttpRequest();
 
+    httpRequest.onreadystatechange = function () {
+        var row = JSON.parse(this.responseText);
+        console.log("from db tracked stocks");
+        console.log(row);
+        displayInvest(obj);
+    }
+    httpRequest.open("GET", url, true);
+    httpRequest.send();
 }
