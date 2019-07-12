@@ -126,20 +126,21 @@ function trackStock(button) {
     var stock = row[0].innerHTML;
     console.log(row[0].innerHTML);
     console.log(row[1].innerHTML);
-    var url = '/insert?stock=' + stock;
+    var url = '/insert?stock=' + stock +'&table=stockstracked';
     var httpRequest = new XMLHttpRequest();
     //inserting into the db
     httpRequest.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
+            console.log("we insertStock")
             console.log(this.responseText)
             
             //document.getElementById("tTable").innerHTML = this.responseText;
+        // getAllStock(stock);
 
         }
     }
     httpRequest.open("GET", url, true);
     httpRequest.send();
-    getAllStock(stock);
 }
 
 function investStock(button) {

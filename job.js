@@ -251,9 +251,7 @@ function readAllFromTable(req, res){
     });
 }
 function insert(req, res){
-    insertIntoTable('stockstracked', req.query.stock, function(){
-        res.render('pages/sDisplay', {'row': 'We have inserted into the tracked db'});
-    });
+    insertIntoTable('stockstracked', req.query.stock, readAllFromTable);
 }
 
 app.set('views', path.join(__dirname, 'views'))
