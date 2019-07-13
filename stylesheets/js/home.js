@@ -277,6 +277,13 @@ function getStocksInvested(){
             console.log(this.responseText);
             var row = this.responseText;
             console.log('db has investments ');
+            console.log(row[0].symbol);
+            console.log(row.symbol);
+            var again = JSON.parse(this.responseText);
+            console.log('db has again investments ');
+            console.log(again[0].symbol);
+            console.log(again.symbol);
+
             if(!stop){
                 for(let i = 0; i < row.length; i++){
                     table += '<tr class="'+row[i].symbol +'" ><td>'+row[i].symbol+'</td><td id="ns'+row[i].symbol+'">'+row[i].numstocks+'</td><td id="a'+row[i].symbol + '">'+row[i].amount+'</td></tr>'
