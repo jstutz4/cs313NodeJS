@@ -194,7 +194,7 @@ function getStocksTracked(){
         console.log(row);
         console.log('db has stocks ');
         for(let i = 0; i < row.length; i++){
-            apiSearch(element.symbol, displayTable);
+            apiSearch(row[i].symbol, displayTable);
         }
         // row.forEach(element => {
         //     console.log(element.symbol);
