@@ -162,11 +162,13 @@ function getInvest(obj){
             var table = document.getElementById('iTable').innerHTML;
             var rows = document.getElementById('iTable').children;
             console.log(rows);
-            rows.forEach(element => {
-                if(element.className == symbol){
-                    console.log('duplicate addition')
-                }
-            });
+            if(rows.length > 0){
+                rows.forEach(element => {
+                    if(element.className == symbol){
+                        console.log('duplicate addition')
+                    }
+                });
+            }
             table += '<tr class="'+symbol +'" ><td>'+symbol+'</td><td id="ns'+symbol+'">'+obj.numstocks+'</td><td id="a'+symbol + '">'+obj.amount+'</td></tr>'
 
             document.getElementById('iTable').innerHTML = table;
