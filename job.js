@@ -296,7 +296,7 @@ function addinvestment(req, res){
             console.log("found DB " + JSON.stringify(result.rows));
             if(result.rowCount >= 0){
                 result.rows.forEach(element => {
-                    if(element.symbol = req.query.symbol){
+                    if(element.symbol == req.query.symbol){
                         duplicate = true;
                         updateinvestment(req.query.symbol, Number(req.query.numstocks) + Number(element.numstocks), Number(req.query.amount) + Number(element.amount), function(){
                         res.render("pages/sDisplay", {'row': JSON.stringify({'symbol': req.query.symbol, 'numstocks':Number(req.query.numstocks) + Number(element.numstocks), 'amount':Number(req.query.amount) + Number(element.amount)})});
