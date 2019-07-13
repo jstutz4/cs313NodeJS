@@ -280,7 +280,7 @@ function getStocksInvested(){
             console.log('db has stocks ');
             if(!stop){
                 for(let i = 0; i < row.length; i++){
-                    table += '<tr class="'+row.symbol +'" ><td>'+row.symbol+'</td><td id="ns'+row.symbol+'">'+row.numstocks+'</td><td id="a'+row.symbol + '">'+row.amount+'</td></tr>'
+                    table += '<tr class="'+row[i].symbol +'" ><td>'+row[i].symbol+'</td><td id="ns'+row[i].symbol+'">'+row[i].numstocks+'</td><td id="a'+row[i].symbol + '">'+row[i].amount+'</td></tr>'
                     document.getElementById('iTable').innerHTML = table;
                     stop = true;
                 }
