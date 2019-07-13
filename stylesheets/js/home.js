@@ -175,8 +175,8 @@ function getInvest(obj){
             }
             if(!duplicate){
                 table += '<tr class="'+symbol +'" ><td>'+symbol+'</td><td id="ns'+symbol+'">'+obj.numstocks+'</td><td id="a'+symbol + '">'+obj.amount+'</td></tr>'
+                document.getElementById('iTable').innerHTML = table;
             }
-            document.getElementById('iTable').innerHTML = table;
         }
     }
     httpRequest.open("GET", url, true);

@@ -283,6 +283,7 @@ function addinvestment(req, res){
 
     var sql = ("SELECT symbol, numstocks, amount FROM stocksinvested WHERE user_id = $1::int")
     params = [1]
+    var duplicate = false;
     console.log(sql);
     pool.query(sql, params, function (error, result) {
         console.log('stop here')
@@ -291,23 +292,35 @@ function addinvestment(req, res){
             console.log(error);
             res.render("pages/sDisplay", {'row':error} );
         }
-        else if(result.rowCount == 0){
+        else{
+            console.log("found DB " + JSON.stringify(result.rows));
+            if(result.rowCount >= 0){
+                result.rows.forEach(element => {
+                    if(element.symbol = req.query.symbol){
+                        duplicate = true;
+                        updateinvestment(req.query.symbol, Number(req.query.numstocks) + Number(element.numstocks), Number(req.query.amount) + Number(element.amount), function(){
+                        res.render("pages/sDisplay", {'row': JSON.stringify({'symbol': req.query.symbol, 'numstocks':Number(req.query.numstocks) + Number(element.numstocks), 'amount':Number(req.query.amount) + Number(element.amount)})});
+                        })
+                    }
+                });
+            }
+        }
+        if(!duplicate){
             console.log('why not working')
             insertInvestment(req.query.symbol, req.query.numstocks, req.query.amount, function(){
                 res.render("pages/sDisplay", {'row': JSON.stringify({'symbol': req.query.symbol, 'numstocks':req.query.numstocks, 'amount':req.query.amount})});
             })
-
         }
-        else{
-            console.log("found DB " + JSON.stringify(result.rows));
-            result.rows.forEach(element => {
-                if(element.symbol = req.query.symbol){
-                    updateinvestment(req.query.symbol, Number(req.query.numstocks) + Number(element.numstocks), Number(req.query.amount) + Number(element.amount), function(){
-                    res.render("pages/sDisplay", {'row': JSON.stringify({'symbol': req.query.symbol, 'numstocks':Number(req.query.numstocks) + Number(element.numstocks), 'amount':Number(req.query.amount) + Number(element.amount)})});
-                    })
-                }
-            });
-        }
+        // else{
+        //     console.log("found DB " + JSON.stringify(result.rows));
+        //     result.rows.forEach(element => {
+        //         if(element.symbol = req.query.symbol){
+        //             updateinvestment(req.query.symbol, Number(req.query.numstocks) + Number(element.numstocks), Number(req.query.amount) + Number(element.amount), function(){
+        //             res.render("pages/sDisplay", {'row': JSON.stringify({'symbol': req.query.symbol, 'numstocks':Number(req.query.numstocks) + Number(element.numstocks), 'amount':Number(req.query.amount) + Number(element.amount)})});
+        //             })
+        //         }
+        //     });
+        // }
     });
 
     // insertIntoTable('stocksinvested', params, function(err){
