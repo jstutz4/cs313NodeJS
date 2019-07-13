@@ -211,7 +211,7 @@ function displayInvest(obj){
     console.log(obj.amount);
 }
 
-function getStocksTracked(){
+function getStocksTracked(callBack){
     //read from the data base
     var url = '/allstocks'
     stop = false;
@@ -229,6 +229,7 @@ function getStocksTracked(){
                     apiSearch(row[i].symbol, displayTable);
                     stop = true;
                 }
+                callBack();
             }
 
             // row.forEach(element => {
@@ -302,8 +303,8 @@ function getStocksInvested(){
                 //call apiseach with display
 }
 function runtwo(){
-    getStocksInvested();
+    //getStocksInvested();
 
-    //getStocksTracked();
+    getStocksTracked(getStocksInvested);
 }
 runtwo();
