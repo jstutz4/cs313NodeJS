@@ -284,18 +284,19 @@ function addinvestment(req, res){
     console.log(sql);
     pool.query(sql, params, function (error, result) {
         console.log('stop here')
-        console.log(result);
+        //console.log(result);
         if (error) {
             console.log(error);
             res.render("pages/sDisplay", JSON.stringify({'row':error}) );
         }
-        else if(result[0] == null){
-            res.render("pages/sDisplay", JSON.stringify({'row':'empty'}) );
+        else if(result.rowCount == 0){
+            console.log('why not working')
+            res.render("pages/sDisplay", JSON.stringify([{'row':'empty'}]) );
 
         }
         else{
             console.log("found DB " + JSON.stringify(result.rows))
-            res.render("pages/sDisplay", JSON.stringify({'row':result.row}) );
+            res.render("pages/sDisplay", JSON.stringify(result.row) );
         }
     });
 
