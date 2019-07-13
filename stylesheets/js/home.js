@@ -195,11 +195,13 @@ function getStocksTracked(){
     var httpRequest = new XMLHttpRequest();
 
     httpRequest.onreadystatechange = function () {
+        console.log(this.responseText);
         var row = JSON.parse(this.responseText);
         console.log(row);
         console.log('db has stocks ');
         row.forEach(element => {
             console.log(element.symbol);
+            apiSearch(element.symbol, displayTable)
         });
     }
     httpRequest.open("GET", url, true);
