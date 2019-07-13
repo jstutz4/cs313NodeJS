@@ -153,18 +153,26 @@ function getInvest(obj){
     httpRequest.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             console.log(this.responseText);
-            var obj = JSON.parse(this.responseText);
-            console.log(obj);
-            if(obj.row = 'empty'){
+            var obj;
+            
+            if(this.responseText = 'empty'){
                 console.log('carry on');
             }
+            else{
+                obj = JSON.parse(this.responseText);
+                console.log(obj);
+                obj.forEach(element => {
+                    if(obj.symbol = symbol){
+                        console.log(numStocks + obj.numStocks);
+                        console.log(amount + obj.amount);
+                        numStocks += obj.newStock;
+                        amount += obj.amoun;
+                    }
+                
+                });
+             }
 
-            obj.forEach(element => {
-                if(obj.symbol = symbol){
-                    console.log(numStocks + obj.numStocks);
-                    console.log(amount + obj.amount)
-                }
-            });
+           
             //then display table
             console.log("num Stocks: " + numStocks);
             console.log("amount invested: " + amount);
