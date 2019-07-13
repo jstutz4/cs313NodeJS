@@ -137,7 +137,6 @@ function investStock(button) {
     var id = button.getAttribute("name");
     var row = document.getElementById('price'+id);
     apiSearch(id, getInvest);
-
 }
 
 function getInvest(obj){
@@ -147,14 +146,36 @@ function getInvest(obj){
     //get information
     // re-calulate information
     // insert it into the db
-    //then display table
-    console.log("num Stocks: " + numStocks);
-    console.log("amount invested: " + amount);
-    //insertStock({'symbol': symbol, 'numStocks':numStocks, 'amount':amount});
-    var table = document.getElementById('iTable').innerHTML;
-    table += '<tr><td>'+symbol+'</td><td>'+numStocks+'</td><td>'+amount+'</td></tr>'
+    var url = '/addinvest?symbol=' + symbol + '&numstocks=' + numStocks + '&amount=' + amount;
+    console.log('url:  ' + url);
+    var httpRequest = new XMLHttpRequest();
 
-    document.getElementById('iTable').innerHTML = table;
+    httpRequest.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var obj = JSON.parse(this.responseText);
+            console.log(this.responseText);
+            console.log(obj);
+
+            obj.forEach(element => {
+                if(obj.symbol = symbol){
+                    console.log(numStocks + obj.numStocks);
+                    console.log(amount + obj.amount)
+                }
+            });
+            //then display table
+            console.log("num Stocks: " + numStocks);
+            console.log("amount invested: " + amount);
+            //insertStock({'symbol': symbol, 'numStocks':numStocks, 'amount':amount});
+            var table = document.getElementById('iTable').innerHTML;
+            table += '<tr><td>'+symbol+'</td><td>'+numStocks+'</td><td>'+amount+'</td></tr>'
+
+            document.getElementById('iTable').innerHTML = table;
+        }
+    }
+    httpRequest.open("GET", url, true);
+    httpRequest.send();
+
+    
 }
 
 

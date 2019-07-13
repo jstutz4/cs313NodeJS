@@ -274,6 +274,30 @@ function getAllTrackStocks(req, res){
     });
 }
 
+function addinvestment(req, res){
+    var params = [1, req.query.symbol, req.query.numStocks, req.query.amount];
+  
+    console.log("geting")
+
+    var sql = ("SELECT symbol, numstocks, amount FROM stocksinvested WHERE user_id = $1::int")
+    var params = [1]
+    console.log(sql);
+    pool.query(sql, params, function (error, result) {
+        if (error) {
+            console.log(error);
+            res.render("pages/sDisplay", JSON.stringify({'row':error}) );
+        }
+        else{
+            console.log("found DB " + JSON.stringify(result.rows))
+            res.render("pages/sDisplay", JSON.stringify({'row':result.row}) );
+        }
+    });
+
+    // insertIntoTable('stocksinvested', params, function(err){
+
+    // })
+}
+
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs');
 app.use(express.static("stylesheets"));
@@ -283,6 +307,7 @@ app.get('/search', updateSearch)
 app.get('/update', updateStocks)
 app.get('/read', readAllFromTable)
 app.get('/insert', insert)
+app.get('/addinvest', addinvestment)
 app.get('/allstocks', getAllTrackStocks)
 
 app.listen(PORT, () => console.log(`Listening on ${PORT}`))
