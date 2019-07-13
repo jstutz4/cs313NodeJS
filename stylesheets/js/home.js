@@ -125,17 +125,17 @@ function trackStock(button) {
     var url = '/insert?stock=' + stock;
     var httpRequest = new XMLHttpRequest();
     //inserting into the db
-    // httpRequest.onreadystatechange = function () {
-    //     if (this.readyState == 4 && this.status == 200) {
-    //         console.log("we insertStock")
-    //         console.log(this.responseText)
+    httpRequest.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log("we insertStock")
+            console.log(this.responseText)
             
            
 
-    //     }
-    // }
-    // httpRequest.open("GET", url, true);
-    // httpRequest.send();
+        }
+    }
+    httpRequest.open("GET", url, true);
+    httpRequest.send();
     getAllStock(stock);
 }
 
