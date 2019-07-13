@@ -1,4 +1,4 @@
-
+var stop = false;
 function apiSearch(symbol, callBack) {
     //var search = document.getElementById("sStocks").value;
 
@@ -185,26 +185,28 @@ function displayInvest(obj){
 function getStocksTracked(){
     //read from the data base
     var url = '/allstocks'
+    if(!stop){
+        var httpRequest = new XMLHttpRequest();
 
-    var httpRequest = new XMLHttpRequest();
-
-    httpRequest.onreadystatechange = function () {
-        console.log(this.responseText);
-        var row = JSON.parse(this.responseText);
-        console.log(row);
-        console.log('db has stocks ');
-        for(let i = 0; i < row.length; i++){
-            apiSearch(row[i].symbol, displayTable);
+        httpRequest.onreadystatechange = function () {
+            console.log(this.responseText);
+            var row = JSON.parse(this.responseText);
+            console.log(row);
+            console.log('db has stocks ');
+            for(let i = 0; i < row.length; i++){
+                apiSearch(row[i].symbol, displayTable);
+            }
+            stop = true;
+            // row.forEach(element => {
+            //     console.log(element.symbol);
+            //     apiSearch(element.symbol, displayTable);
+            // });
         }
-        // row.forEach(element => {
-        //     console.log(element.symbol);
-        //     apiSearch(element.symbol, displayTable);
-        // });
+        httpRequest.open("GET", url, true);
+        httpRequest.send();
+            //call back to new function
+                //call apiseach with display
     }
-    httpRequest.open("GET", url, true);
-    httpRequest.send();
-        //call back to new function
-            //call apiseach with display
 }
 
 getStocksTracked();
