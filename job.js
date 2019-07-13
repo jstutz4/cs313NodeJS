@@ -291,7 +291,7 @@ function addinvestment(req, res){
         }
         else if(result.rowCount == 0){
             console.log('why not working')
-            res.render("pages/sDisplay", JSON.stringify([{'row':'empty'}]) );
+            res.render("pages/sDisplay", {'row':'empty'});
 
         }
         else{
