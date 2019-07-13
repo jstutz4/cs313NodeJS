@@ -143,6 +143,7 @@ function getInvest(obj){
     var amount = document.getElementById("price"+obj.symbol).value;
     var numStocks = (amount/(obj.latestPrice).toFixed(3)).toFixed(3);
     var symbol = obj.symbol;
+    var duplicate = false;
     //get information
     // re-calulate information
     // insert it into the db
@@ -168,10 +169,11 @@ function getInvest(obj){
                         console.log('duplicate addition')
                         document.getElementById('ns' + symbol).innerHTML = obj.numstocks;
                         document.getElementById('a'+ symbol).innerHTML = obj.amount;
+                        duplicate = true;
                     }
                 }
             }
-            else{
+            if(!duplicate){
                 table += '<tr class="'+symbol +'" ><td>'+symbol+'</td><td id="ns'+symbol+'">'+obj.numstocks+'</td><td id="a'+symbol + '">'+obj.amount+'</td></tr>'
             }
             document.getElementById('iTable').innerHTML = table;
