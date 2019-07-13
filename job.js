@@ -283,11 +283,13 @@ function addinvestment(req, res){
     var params = [1]
     console.log(sql);
     pool.query(sql, params, function (error, result) {
+        console.log('stop here')
+        console.log(result);
         if (error) {
             console.log(error);
             res.render("pages/sDisplay", JSON.stringify({'row':error}) );
         }
-        else if(result == null){
+        else if(result[0] == null){
             res.render("pages/sDisplay", JSON.stringify({'row':'empty'}) );
 
         }
