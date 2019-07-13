@@ -27,7 +27,7 @@ function getSearch() {
     apiSearch(search, searchStock);
 }
 
-function getAllStock(stock, array) {
+function getAllStock(stock) {
 
     var stringObj;
     var obj;
@@ -36,23 +36,19 @@ function getAllStock(stock, array) {
     var symbol_list = "";
     var length;
     var i = 0;
-    if(array != null && array != 'undefined'){
-        length = array.length;
-        i= -1;
+   
+    if(document.getElementById('tTable').children != null){
+        symbol_list = document.getElementById('tTable').children;
+    }
+    console.log(symbol_list)
+    console.log('look at i ');
+    console.log(symbol_list.length);
+    if(symbol_list.length == 0){
+        length = 0;
+        i = -1;
     }else{
-        if(document.getElementById('tTable').children != null){
-            symbol_list = document.getElementById('tTable').children;
-        }
-        console.log(symbol_list)
-        console.log('look at i ');
-        console.log(symbol_list.length);
-        if(symbol_list.length == 0){
-            length = 0;
-            i = -1;
-        }else{
-            length = symbol_list.length;
-            i = -1;
-        }
+        length = symbol_list.length;
+        i = -1;
     }
   
     
@@ -129,18 +125,18 @@ function trackStock(button) {
     var url = '/insert?stock=' + stock +'&table=stockstracked';
     var httpRequest = new XMLHttpRequest();
     //inserting into the db
-    httpRequest.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            console.log("we insertStock")
-            console.log(this.responseText)
+    // httpRequest.onreadystatechange = function () {
+    //     if (this.readyState == 4 && this.status == 200) {
+    //         console.log("we insertStock")
+    //         console.log(this.responseText)
             
-            //document.getElementById("tTable").innerHTML = this.responseText;
-        // getAllStock(stock);
+           
 
-        }
-    }
-    httpRequest.open("GET", url, true);
-    httpRequest.send();
+    //     }
+    // }
+    // httpRequest.open("GET", url, true);
+    // httpRequest.send();
+    getAllStock(stock);
 }
 
 function investStock(button) {

@@ -251,7 +251,7 @@ function readAllFromTable(req, res){
     });
 }
 function insert(req, res){
-    readAllFromTable(req,res);
+    //readAllFromTable(req,res);
     console.log("inserting")
 
     var sql = ("INSERT INTO " + req.query.table + " (user_id, symbol) VALUES ($1::int, $2::text)")
