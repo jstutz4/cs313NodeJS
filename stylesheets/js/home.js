@@ -204,3 +204,4 @@ function getStocksTracked(){
             //call apiseach with display
 }
 
+getStocksTracked();
