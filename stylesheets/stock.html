@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" href="/jobs.css" />
     <script type="text/javascript" src="/js/home.js"></script>        
 </head>
-<body>
+<body onload="getStocksTracked()">
 <h1>Stock Look Up</h1>
 <div>
 <ul>
@@ -21,7 +21,7 @@
 </div>
 <a href="https://iexcloud.io">Data provided by IEX Cloud</a>
 <div>
-<table onload="getStocksTracked()">
+<table>
     <thead>
         <table><tr><th>symbol</th><th>price</th><th>volume (M)</th><th>High</th><th>Low</th><th>Change (%)</th><th>Amount</th><th>Action</th></tr>
     </thead>
