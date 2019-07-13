@@ -163,14 +163,17 @@ function getInvest(obj){
             var rows = document.getElementById('iTable').children;
             console.log(rows);
             if(rows.length > 0){
-                rows.forEach(element => {
-                    if(element.className == symbol){
+                for(let i = 0; i < rows.length; i++){
+                    if(rows[i].className == symbol){
                         console.log('duplicate addition')
+                        document.getElementById('ns' + symbol).innerHTML = obj.numstocks;
+                        document.getElementById('a'+ symbol).innerHTML = obj.amount;
                     }
-                });
+                }
             }
-            table += '<tr class="'+symbol +'" ><td>'+symbol+'</td><td id="ns'+symbol+'">'+obj.numstocks+'</td><td id="a'+symbol + '">'+obj.amount+'</td></tr>'
-
+            else{
+                table += '<tr class="'+symbol +'" ><td>'+symbol+'</td><td id="ns'+symbol+'">'+obj.numstocks+'</td><td id="a'+symbol + '">'+obj.amount+'</td></tr>'
+            }
             document.getElementById('iTable').innerHTML = table;
         }
     }
