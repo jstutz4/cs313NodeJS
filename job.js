@@ -302,7 +302,7 @@ function addinvestment(req, res){
             console.log("found DB " + JSON.stringify(result.rows));
             result.rows.forEach(element => {
                 if(element.symbol = req.query.symbol){
-                    insertInvestment(req.query.symbol, Number(req.query.numstocks) + Number(element.numstocks), Number(req.query.amount) + Number(element.amount), function(){
+                    updateinvestment(req.query.symbol, Number(req.query.numstocks) + Number(element.numstocks), Number(req.query.amount) + Number(element.amount), function(){
                     res.render("pages/sDisplay", {'row': JSON.stringify({'symbol': req.query.symbol, 'numstocks':Number(req.query.numstocks) + Number(element.numstocks), 'amount':Number(req.query.amount) + Number(element.amount)})});
                     })
                 }
@@ -330,6 +330,21 @@ function insertInvestment(symbol, numstocks, amount, callBack){
     });
 }
 
+function updateinvestment(symbol, numstocks, amount, callBack){
+    console.log("inserting")
+    params = [numstocks, amount, symbol];
+
+    var sql = ("UPDATE stocksinvested SET numstocks = $1::float, amount = $2::float WHERE symbol = $3::text");
+    
+    console.log(sql);
+    pool.query(sql, params, function (error, result) {
+        if (error) console.log(error);
+
+        console.log("found DB " + JSON.stringify(result.rows))
+        callBack();
+    });
+
+}
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs');
 app.use(express.static("stylesheets"));
