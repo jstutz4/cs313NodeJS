@@ -270,7 +270,7 @@ function getAllTrackStocks(req, res){
     getAllFromTable('stockstracked', 'symbol', function(err, results){
         console.log('all stocks ');
         console.log(JSON.stringify(results));
-        res.render('pages/sDisplay', {'row':JSON.stringify(results)});
+        res.render("pages/sDisplay", {'row':JSON.stringify(results)});
     });
 }
 
@@ -292,7 +292,7 @@ function addinvestment(req, res){
         else if(result.rowCount == 0){
             console.log('why not working')
             insertInvestment(req.query.symbol, req.query.numStocks, req.query.amount, function(){
-                res.render('/pages/sDisplay', {'row': JSON.stringify({'symbol': req.query.symbol, 'numstocks':req.query.numStocks, 'amount':req.query.amount})});
+                res.render("pages/sDisplay", {'row': JSON.stringify({'symbol': req.query.symbol, 'numstocks':req.query.numStocks, 'amount':req.query.amount})});
             })
 
         }
