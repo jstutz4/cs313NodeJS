@@ -193,13 +193,13 @@ function getStocksTracked(){
         var row = JSON.parse(this.responseText);
         console.log(row);
         console.log('db has stocks ');
-        // for(let i = 0; i < row.length; i++){
-        //     apiSearch(element.symbol, displayTable);
-        // }
-        row.forEach(element => {
-            console.log(element.symbol);
+        for(let i = 0; i < row.length; i++){
             apiSearch(element.symbol, displayTable);
-        });
+        }
+        // row.forEach(element => {
+        //     console.log(element.symbol);
+        //     apiSearch(element.symbol, displayTable);
+        // });
     }
     httpRequest.open("GET", url, true);
     httpRequest.send();
