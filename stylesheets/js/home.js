@@ -280,10 +280,16 @@ function getStocksInvested(){
 
             if(!stop){
                 for(let i = 0; i < row.length; i++){
-                    table += '<tr class="'+row[i].symbol +'" ><td>'+row[i].symbol+'</td><td id="ns'+row[i].symbol+'">'+row[i].numstocks+'</td><td id="a'+row[i].symbol + '">'+row[i].amount+'</td></tr>'
-                    document.getElementById('iTable').innerHTML = table;
+                    if(i == 0){
+                    table = '<tr class="'+row[i].symbol +'" ><td>'+row[i].symbol+'</td><td id="ns'+row[i].symbol+'">'+row[i].numstocks+'</td><td id="a'+row[i].symbol + '">'+row[i].amount+'</td></tr>'
+                    }
+                    else{
+                        table += '<tr class="'+row[i].symbol +'" ><td>'+row[i].symbol+'</td><td id="ns'+row[i].symbol+'">'+row[i].numstocks+'</td><td id="a'+row[i].symbol + '">'+row[i].amount+'</td></tr>'
+                    }
                     stop = true;
+                    console.log('only once');
                 }
+                document.getElementById('iTable').innerHTML = table;
             }
         }
         httpRequest.open("GET", url, true);
