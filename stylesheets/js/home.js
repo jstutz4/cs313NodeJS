@@ -299,4 +299,3 @@ function getStocksInvested(){
                 //call apiseach with display
 }
 getStocksTracked();
-getStocksInvested();
