@@ -9,13 +9,7 @@ function apiSearch(symbol, callBack) {
     httpRequest.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             var obj = JSON.parse(this.responseText);
-            if (callBack == searchStock) {
-                callBack(obj);
-            } else {
-                console.log('look below');
-                console.log(this.responseText);
-                callBack(obj);
-            }
+            callBack(obj);
         }
     }
     httpRequest.open("GET", url, true);
@@ -94,7 +88,7 @@ function displayTable(obj) {
     var table = document.getElementById('tTable').innerHTML;
     var fTable = '</table>';
     button = '<input type="button" name="' + obj.symbol + '" value="Invest Stock" onclick="investStock(this)">';
-    table += '<tr class=' + obj.symbol + '"><td name="' + obj.symbol + '">' + obj.symbol + '</td><td name="' + obj.symbol + '">$' + obj.latestPrice + '</td><td name="' + obj.symbol + '">' + ((obj.latestVolume / 1000000).toFixed(2)) + '</td><td>$'+ obj.high+'</td><td>$'+obj.low+'</td><td>'+(obj.changePercent*100).toFixed(3)+'%</td><td><input id="price'+obj.symbol+ '" placeholder="$100" type="decimal" name="'+obj.symbol+'"></td><td>' + button + "</td></tr>";
+    table = '<tr class=' + obj.symbol + '"><td name="' + obj.symbol + '">' + obj.symbol + '</td><td name="' + obj.symbol + '">$' + obj.latestPrice + '</td><td name="' + obj.symbol + '">' + ((obj.latestVolume / 1000000).toFixed(2)) + '</td><td>$'+ obj.high+'</td><td>$'+obj.low+'</td><td>'+(obj.changePercent*100).toFixed(3)+'%</td><td><input id="price'+obj.symbol+ '" placeholder="$100" type="decimal" name="'+obj.symbol+'"></td><td>' + button + "</td></tr>";
 
     document.getElementById("tTable").innerHTML = table;
 }
