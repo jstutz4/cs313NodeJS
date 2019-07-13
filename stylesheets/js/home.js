@@ -1,4 +1,5 @@
 var stop = false;
+var stop2 = false;
 function apiSearch(symbol, callBack) {
     //var search = document.getElementById("sStocks").value;
 
@@ -243,43 +244,42 @@ function getStocksTracked(callBack){
                 //call apiseach with display
 }
 
-function insertInvest(symbol, numstocks, amount){
-    var url = '/allstocks'
+// function insertInvest(symbol, numstocks, amount){
+//     var url = '/allstocks'
     
-        var httpRequest = new XMLHttpRequest();
+//         var httpRequest = new XMLHttpRequest();
 
-        httpRequest.onreadystatechange = function () {
-            console.log(this.responseText);
-            var row = JSON.parse(this.responseText);
-            console.log(row);
-            console.log('db has stocks ');
-            if(!stop){
-                for(let i = 0; i < row.length; i++){
-                    apiSearch(row[i].symbol, displayTable);
-                    stop = true;
-                }
-            }
+//         httpRequest.onreadystatechange = function () {
+//             console.log(this.responseText);
+//             var row = JSON.parse(this.responseText);
+//             console.log(row);
+//             console.log('db has stocks ');
+//             if(!stop){
+//                 for(let i = 0; i < row.length; i++){
+//                     apiSearch(row[i].symbol, displayTable);
+//                     stop = true;
+//                 }
+//             }
 
-            // row.forEach(element => {
-            //     console.log(element.symbol);
-            //     apiSearch(element.symbol, displayTable);
-            // });
-        }
-        httpRequest.open("GET", url, true);
-        httpRequest.send();
-}
+//             // row.forEach(element => {
+//             //     console.log(element.symbol);
+//             //     apiSearch(element.symbol, displayTable);
+//             // });
+//         }
+//         httpRequest.open("GET", url, true);
+//         httpRequest.send();
+// }
 
 function getStocksInvested(){
     //read from the data base
     var url = '/allinvestments'
-    stop = false;
     var table;
         var httpRequest = new XMLHttpRequest();
 
         httpRequest.onreadystatechange = function () {
             
 
-            if(!stop){
+            if(!stop2){
             console.log(this.responseText);
             var row = JSON.parse(this.responseText);
             console.log(row.length);
@@ -292,7 +292,7 @@ function getStocksInvested(){
                     }
                     
                 }
-                stop = true;
+                stop2 = true;
                 console.log('only once');
                 document.getElementById('iTable').innerHTML = table;
             }
