@@ -155,6 +155,9 @@ function getInvest(obj){
             var obj = JSON.parse(this.responseText);
             console.log(this.responseText);
             console.log(obj);
+            if(obj.row = 'empty'){
+                console.log('carry on');
+            }
 
             obj.forEach(element => {
                 if(obj.symbol = symbol){

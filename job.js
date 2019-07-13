@@ -287,6 +287,10 @@ function addinvestment(req, res){
             console.log(error);
             res.render("pages/sDisplay", JSON.stringify({'row':error}) );
         }
+        else if(result == null){
+            res.render("pages/sDisplay", JSON.stringify({'row':'empty'}) );
+
+        }
         else{
             console.log("found DB " + JSON.stringify(result.rows))
             res.render("pages/sDisplay", JSON.stringify({'row':result.row}) );
