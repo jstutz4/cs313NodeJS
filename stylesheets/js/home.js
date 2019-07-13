@@ -219,11 +219,12 @@ function getStocksTracked(){
         var httpRequest = new XMLHttpRequest();
 
         httpRequest.onreadystatechange = function () {
-            console.log(this.responseText);
-            var row = JSON.parse(this.responseText);
-            console.log(row);
-            console.log('db has stocks ');
+           
             if(!stop){
+                console.log(this.responseText);
+                var row = JSON.parse(this.responseText);
+                console.log(row);
+                console.log('db has stocks ');
                 for(let i = 0; i < row.length; i++){
                     apiSearch(row[i].symbol, displayTable);
                     stop = true;
@@ -275,11 +276,12 @@ function getStocksInvested(){
         var httpRequest = new XMLHttpRequest();
 
         httpRequest.onreadystatechange = function () {
+            
+
+            if(!stop){
             console.log(this.responseText);
             var row = JSON.parse(this.responseText);
             console.log(row.length);
-
-            if(!stop){
                 for(let i = 0; i < row.length; i++){
                     if(i == 0){
                     table = '<tr class="'+row[i].symbol +'" ><td>'+row[i].symbol+'</td><td id="ns'+row[i].symbol+'">'+row[i].numstocks+'</td><td id="a'+row[i].symbol + '">'+row[i].amount+'</td></tr>'
@@ -287,9 +289,10 @@ function getStocksInvested(){
                     else{
                         table += '<tr class="'+row[i].symbol +'" ><td>'+row[i].symbol+'</td><td id="ns'+row[i].symbol+'">'+row[i].numstocks+'</td><td id="a'+row[i].symbol + '">'+row[i].amount+'</td></tr>'
                     }
-                    stop = true;
-                    console.log('only once');
+                    
                 }
+                stop = true;
+                console.log('only once');
                 document.getElementById('iTable').innerHTML = table;
             }
         }
