@@ -275,9 +275,8 @@ function getStocksInvested(){
 
         httpRequest.onreadystatechange = function () {
             console.log(this.responseText);
-            var row = JSON.parse(this.responseText);
-            console.log(row);
-            console.log('db has stocks ');
+            var row = this.responseText;
+            console.log('db has investments ');
             if(!stop){
                 for(let i = 0; i < row.length; i++){
                     table += '<tr class="'+row[i].symbol +'" ><td>'+row[i].symbol+'</td><td id="ns'+row[i].symbol+'">'+row[i].numstocks+'</td><td id="a'+row[i].symbol + '">'+row[i].amount+'</td></tr>'
