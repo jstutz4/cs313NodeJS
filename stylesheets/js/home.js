@@ -122,7 +122,7 @@ function trackStock(button) {
     var stock = row[0].innerHTML;
     console.log(row[0].innerHTML);
     console.log(row[1].innerHTML);
-    var url = '/insert?stock=' + stock +'&table=stockstracked';
+    var url = '/insert?stock=' + stock;
     var httpRequest = new XMLHttpRequest();
     //inserting into the db
     // httpRequest.onreadystatechange = function () {

@@ -254,7 +254,7 @@ function insert(req, res){
     //readAllFromTable(req,res);
     console.log("inserting")
 
-    var sql = ("INSERT INTO " + req.query.table + " (user_id, symbol) VALUES ($1::int, $2::text)")
+    var sql = ("INSERT INTO stockstracked (user_id, symbol) VALUES ($1::int, $2::text)")
     params = [1, req.query.stock];
     console.log(sql);
     pool.query(sql, params, function (error, result) {
