@@ -160,7 +160,14 @@ function getInvest(obj){
             console.log("amount invested: " + amount);
             //insertStock({'symbol': symbol, 'numStocks':numStocks, 'amount':amount});
             var table = document.getElementById('iTable').innerHTML;
-            table += '<tr><td>'+symbol+'</td><td>'+obj.numstocks+'</td><td>'+obj.amount+'</td></tr>'
+            var rows = document.getElementById('iTable').children;
+            console.log(rows);
+            rows.forEach(element => {
+                if(element.className == symbol){
+                    console.log('duplicate addition')
+                }
+            });
+            table += '<tr class="'+symbol +'" ><td>'+symbol+'</td><td id="ns'+symbol+'">'+obj.numstocks+'</td><td id="a'+symbol + '">'+obj.amount+'</td></tr>'
 
             document.getElementById('iTable').innerHTML = table;
         }
