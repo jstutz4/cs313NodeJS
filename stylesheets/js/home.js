@@ -153,32 +153,13 @@ function getInvest(obj){
     httpRequest.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             console.log(this.responseText);
-            var obj;
-            
-            if(this.responseText = 'empty'){
-                console.log('carry on');
-            }
-            else{
-                obj = JSON.parse(this.responseText);
-                console.log(obj);
-                obj.forEach(element => {
-                    if(obj.symbol = symbol){
-                        console.log(numStocks + obj.numStocks);
-                        console.log(amount + obj.amount);
-                        numStocks += obj.newStock;
-                        amount += obj.amoun;
-                    }
-                
-                });
-             }
-
-           
+            var obj = JSON.parse(this.responseText);
             //then display table
             console.log("num Stocks: " + numStocks);
             console.log("amount invested: " + amount);
             //insertStock({'symbol': symbol, 'numStocks':numStocks, 'amount':amount});
             var table = document.getElementById('iTable').innerHTML;
-            table += '<tr><td>'+symbol+'</td><td>'+numStocks+'</td><td>'+amount+'</td></tr>'
+            table += '<tr><td>'+symbol+'</td><td>'+obj.numStocks+'</td><td>'+obj.amount+'</td></tr>'
 
             document.getElementById('iTable').innerHTML = table;
         }
@@ -242,6 +223,32 @@ function getStocksTracked(){
         httpRequest.send();
             //call back to new function
                 //call apiseach with display
+}
+
+function insertInvest(symbol, numstocks, amount){
+    var url = '/allstocks'
+    
+        var httpRequest = new XMLHttpRequest();
+
+        httpRequest.onreadystatechange = function () {
+            console.log(this.responseText);
+            var row = JSON.parse(this.responseText);
+            console.log(row);
+            console.log('db has stocks ');
+            if(!stop){
+                for(let i = 0; i < row.length; i++){
+                    apiSearch(row[i].symbol, displayTable);
+                    stop = true;
+                }
+            }
+
+            // row.forEach(element => {
+            //     console.log(element.symbol);
+            //     apiSearch(element.symbol, displayTable);
+            // });
+        }
+        httpRequest.open("GET", url, true);
+        httpRequest.send();
 }
 
 getStocksTracked();

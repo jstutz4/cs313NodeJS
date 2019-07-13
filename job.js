@@ -287,11 +287,13 @@ function addinvestment(req, res){
         //console.log(result);
         if (error) {
             console.log(error);
-            res.render("pages/sDisplay", JSON.stringify({'row':error}) );
+            res.render("pages/sDisplay", {'row':error} );
         }
         else if(result.rowCount == 0){
             console.log('why not working')
-            res.render("pages/sDisplay", {'row':'empty'});
+            insertInvestment(req.query.symbol, req.query.numStocks, req.query.amount, function(){
+                res.render('/pages/sDisplay', {'row': JSON.stringify({'symbol': req.query.symbol, 'numstocks':req.query.numStocks, 'amount':req.query.amount})});
+            })
 
         }
         else{
@@ -305,6 +307,21 @@ function addinvestment(req, res){
     // })
 }
 
+function insertInvestment(symbol, numstocks, amount, callBack){
+    console.log("inserting")
+    params = [1, symbol, numstocks, amount];
+
+    var sql = ("INSERT INTO stocksinvested (user_id, symbol, numstocks, amount) VALUES ($1::int, $2::text, $3::float, $4::float)")
+    
+    console.log(sql);
+    pool.query(sql, params, function (error, result) {
+        if (error) console.log(error);
+
+        console.log("found DB " + JSON.stringify(result.rows))
+        callBack();
+    });
+}
+
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs');
 app.use(express.static("stylesheets"));
@@ -316,5 +333,6 @@ app.get('/read', readAllFromTable)
 app.get('/insert', insert)
 app.get('/addinvest', addinvestment)
 app.get('/allstocks', getAllTrackStocks)
+app.get('/insertinvest', insertInvestment)
 
 app.listen(PORT, () => console.log(`Listening on ${PORT}`))
