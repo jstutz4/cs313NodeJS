@@ -214,7 +214,7 @@ function displayInvest(obj){
 function getStocksTracked(callBack){
     //read from the data base
     var url = '/allstocks'
-    stop = false;
+    //stop = false;
     
         var httpRequest = new XMLHttpRequest();
 
@@ -272,7 +272,7 @@ function insertInvest(symbol, numstocks, amount){
 function getStocksInvested(){
     //read from the data base
     var url = '/allinvestments'
-    stop = false;
+   // stop = false;
     var table;
         var httpRequest = new XMLHttpRequest();
 
