@@ -302,7 +302,8 @@ function getStocksInvested(){
                 //call apiseach with display
 }
 function runtwo(){
-    getStocksTracked();
     getStocksInvested();
+
+    //getStocksTracked();
 }
 runtwo();
