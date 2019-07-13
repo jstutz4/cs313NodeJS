@@ -156,7 +156,7 @@ function getInvest(obj){
     //then display table
     console.log("num Stocks: " + numStocks);
     console.log("amount invested: " + amount);
-    insertStock({'symbol': symbol, 'numStocks':numStocks, 'amount':amount});
+    //insertStock({'symbol': symbol, 'numStocks':numStocks, 'amount':amount});
 }
 
 function retriveStock(stock){
@@ -189,16 +189,19 @@ function displayInvest(obj){
 }
 
 function getStocksTracked(){
-    var url = '/update?amount=' + params.amount + '&numStocks=' + params.numStocks +'&symbol=' + params.symbol;
+    //read from the data base
+    var url = '/allstocks'
 
     var httpRequest = new XMLHttpRequest();
 
     httpRequest.onreadystatechange = function () {
         var row = JSON.parse(this.responseText);
-        console.log("from db tracked stocks");
+        console.log('db has stocks ');
         console.log(row);
-        displayInvest(obj);
     }
     httpRequest.open("GET", url, true);
     httpRequest.send();
+        //call back to new function
+            //call apiseach with display
 }
+

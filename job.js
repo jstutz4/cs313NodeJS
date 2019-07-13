@@ -266,6 +266,14 @@ function insert(req, res){
     });
 }
 
+function getAllTrackStocks(req, res){
+    getAllFromTable('stockstracked', 'symbol', function(err, results){
+        console.log('all stocks ');
+        console.log(JSON.stringify(results));
+        res.render('pages/sDisplay', {'row':JSON.stringify(results)});
+    });
+}
+
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs');
 app.use(express.static("stylesheets"));
@@ -275,5 +283,6 @@ app.get('/search', updateSearch)
 app.get('/update', updateStocks)
 app.get('/read', readAllFromTable)
 app.get('/insert', insert)
+app.get('/allstocks', getAllTrackStocks)
 
 app.listen(PORT, () => console.log(`Listening on ${PORT}`))
