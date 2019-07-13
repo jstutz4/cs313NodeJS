@@ -152,8 +152,8 @@ function getInvest(obj){
 
     httpRequest.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            var obj = JSON.parse(this.responseText);
             console.log(this.responseText);
+            var obj = JSON.parse(this.responseText);
             console.log(obj);
             if(obj.row = 'empty'){
                 console.log('carry on');
