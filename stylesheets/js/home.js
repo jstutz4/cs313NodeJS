@@ -185,7 +185,7 @@ function displayInvest(obj){
 function getStocksTracked(){
     //read from the data base
     var url = '/allstocks'
-    if(!stop){
+    
         var httpRequest = new XMLHttpRequest();
 
         httpRequest.onreadystatechange = function () {
@@ -193,10 +193,13 @@ function getStocksTracked(){
             var row = JSON.parse(this.responseText);
             console.log(row);
             console.log('db has stocks ');
-            for(let i = 0; i < row.length; i++){
-                apiSearch(row[i].symbol, displayTable);
+            if(!stop){
+                for(let i = 0; i < row.length; i++){
+                    apiSearch(row[i].symbol, displayTable);
+                    stop = true;
+                }
             }
-            stop = true;
+
             // row.forEach(element => {
             //     console.log(element.symbol);
             //     apiSearch(element.symbol, displayTable);
@@ -206,7 +209,6 @@ function getStocksTracked(){
         httpRequest.send();
             //call back to new function
                 //call apiseach with display
-    }
 }
 
 getStocksTracked();
