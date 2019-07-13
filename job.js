@@ -298,7 +298,7 @@ function addinvestment(req, res){
         }
         else{
             console.log("found DB " + JSON.stringify(result.rows))
-            res.render("pages/sDisplay", JSON.stringify(result.row) );
+            res.render("pages/sDisplay",{'row': JSON.stringify(result.row)} );
         }
     });
 
