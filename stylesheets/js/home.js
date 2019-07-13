@@ -214,6 +214,7 @@ function displayInvest(obj){
 function getStocksTracked(){
     //read from the data base
     var url = '/allstocks'
+    stop = false;
     
         var httpRequest = new XMLHttpRequest();
 
