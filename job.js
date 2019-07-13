@@ -275,9 +275,11 @@ function getAllTrackStocks(req, res){
 }
 
 function addinvestment(req, res){
-    var params = [1, req.query.symbol, req.query.numStocks, req.query.amount];
+    var params = [1, req.query.symbol, req.query.numstocks, req.query.amount];
   
     console.log("geting")
+    console.log(params);
+
 
     var sql = ("SELECT symbol, numstocks, amount FROM stocksinvested WHERE user_id = $1::int")
     var params = [1]
@@ -292,13 +294,17 @@ function addinvestment(req, res){
         else if(result.rowCount == 0){
             console.log('why not working')
             insertInvestment(req.query.symbol, req.query.numStocks, req.query.amount, function(){
-                res.render("pages/sDisplay", {'row': JSON.stringify({'symbol': req.query.symbol, 'numstocks':req.query.numStocks, 'amount':req.query.amount})});
+                res.render("pages/sDisplay", {'row': JSON.stringify({'symbol': req.query.symbol, 'numstocks':req.query.numstocks, 'amount':req.query.amount})});
             })
 
         }
         else{
-            console.log("found DB " + JSON.stringify(result.rows))
-            res.render("pages/sDisplay",{'row': JSON.stringify(result.row)} );
+            console.log("found DB " + JSON.stringify(result.rows));
+            results.rows.forEach(element => {
+                if(element.symbol = req.query.symbol){
+                    res.render("pages/sDisplay", {'row': JSON.stringify({'symbol': req.query.symbol, 'numstocks':req.query.numstocks + element.numstocks, 'amount':req.query.amount + element.amount})});
+                }
+            });
         }
     });
 

@@ -154,12 +154,13 @@ function getInvest(obj){
         if (this.readyState == 4 && this.status == 200) {
             console.log(this.responseText);
             var obj = JSON.parse(this.responseText);
+            console.log(obj);
             //then display table
             console.log("num Stocks: " + numStocks);
             console.log("amount invested: " + amount);
             //insertStock({'symbol': symbol, 'numStocks':numStocks, 'amount':amount});
             var table = document.getElementById('iTable').innerHTML;
-            table += '<tr><td>'+symbol+'</td><td>'+obj.numStocks+'</td><td>'+obj.amount+'</td></tr>'
+            table += '<tr><td>'+symbol+'</td><td>'+obj.numstocks+'</td><td>'+obj.amount+'</td></tr>'
 
             document.getElementById('iTable').innerHTML = table;
         }
