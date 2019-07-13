@@ -152,7 +152,7 @@ function getInvest(obj){
     console.log("amount invested: " + amount);
     //insertStock({'symbol': symbol, 'numStocks':numStocks, 'amount':amount});
     var table = document.getElementById('iTable').innerHTML;
-    table += '<tr><td>'+symbol+'<td><td>'+numStocks+'</td><td>'+amount+'</td></tr>'
+    table += '<tr><td>'+symbol+'</td><td>'+numStocks+'</td><td>'+amount+'</td></tr>'
 
     document.getElementById('iTable').innerHTML = table;
 }
