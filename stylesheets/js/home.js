@@ -301,4 +301,8 @@ function getStocksInvested(){
             //call back to new function
                 //call apiseach with display
 }
-getStocksTracked();
+function runtwo(){
+    getStocksTracked();
+    getStocksInvested();
+}
+runtwo();
