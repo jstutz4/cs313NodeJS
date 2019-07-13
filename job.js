@@ -358,6 +358,22 @@ function updateinvestment(symbol, numstocks, amount, callBack){
     });
 
 }
+
+function getAllInvestments(req, res){
+    console.log("geting")
+
+    var sql = ("SELECT symbol, numstocks, amount FROM stocksinvested WHERE user_id = $1::int")
+    var params = [1]
+    console.log(sql);
+    pool.query(sql, params, function (error, result) {
+        if (error) console.log(error);
+
+        console.log("found DB " + JSON.stringify(result.rows))
+
+        res.render('pages/sDisplay', {'row': JSON.stringify(result.rows)});
+    });
+}
+
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs');
 app.use(express.static("stylesheets"));
@@ -370,5 +386,6 @@ app.get('/insert', insert)
 app.get('/addinvest', addinvestment)
 app.get('/allstocks', getAllTrackStocks)
 app.get('/insertinvest', insertInvestment)
+app.get('/allinvestments', getAllInvestments)
 
 app.listen(PORT, () => console.log(`Listening on ${PORT}`))

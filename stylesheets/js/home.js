@@ -266,4 +266,30 @@ function insertInvest(symbol, numstocks, amount){
         httpRequest.send();
 }
 
+function getStocksInvested(){
+    //read from the data base
+    var url = '/allinvestments'
+    stop = false;
+    var table;
+        var httpRequest = new XMLHttpRequest();
+
+        httpRequest.onreadystatechange = function () {
+            console.log(this.responseText);
+            var row = JSON.parse(this.responseText);
+            console.log(row);
+            console.log('db has stocks ');
+            if(!stop){
+                for(let i = 0; i < row.length; i++){
+                    table += '<tr class="'+row.symbol +'" ><td>'+row.symbol+'</td><td id="ns'+row.symbol+'">'+row.numstocks+'</td><td id="a'+row.symbol + '">'+row.amount+'</td></tr>'
+                    document.getElementById('iTable').innerHTML = table;
+                    stop = true;
+                }
+            }
+        }
+        httpRequest.open("GET", url, true);
+        httpRequest.send();
+            //call back to new function
+                //call apiseach with display
+}
 getStocksTracked();
+getStocksInvested();
