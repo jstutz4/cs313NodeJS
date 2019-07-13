@@ -282,7 +282,7 @@ function addinvestment(req, res){
 
 
     var sql = ("SELECT symbol, numstocks, amount FROM stocksinvested WHERE user_id = $1::int")
-    var params = [1]
+    params = [1]
     console.log(sql);
     pool.query(sql, params, function (error, result) {
         console.log('stop here')
@@ -293,14 +293,14 @@ function addinvestment(req, res){
         }
         else if(result.rowCount == 0){
             console.log('why not working')
-            insertInvestment(req.query.symbol, req.query.numStocks, req.query.amount, function(){
+            insertInvestment(req.query.symbol, req.query.numstocks, req.query.amount, function(){
                 res.render("pages/sDisplay", {'row': JSON.stringify({'symbol': req.query.symbol, 'numstocks':req.query.numstocks, 'amount':req.query.amount})});
             })
 
         }
         else{
             console.log("found DB " + JSON.stringify(result.rows));
-            results.rows.forEach(element => {
+            result.rows.forEach(element => {
                 if(element.symbol = req.query.symbol){
                     res.render("pages/sDisplay", {'row': JSON.stringify({'symbol': req.query.symbol, 'numstocks':req.query.numstocks + element.numstocks, 'amount':req.query.amount + element.amount})});
                 }
