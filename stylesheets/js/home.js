@@ -275,14 +275,8 @@ function getStocksInvested(){
 
         httpRequest.onreadystatechange = function () {
             console.log(this.responseText);
-            var row = this.responseText;
-            console.log('db has investments ');
-            console.log(row[0].symbol);
-            console.log(row.symbol);
-            var again = JSON.parse(this.responseText);
-            console.log('db has again investments ');
-            console.log(again[0].symbol);
-            console.log(again.symbol);
+            var row = JSON.parse(this.responseText);
+            console.log(row.length);
 
             if(!stop){
                 for(let i = 0; i < row.length; i++){
