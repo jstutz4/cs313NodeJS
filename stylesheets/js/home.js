@@ -196,8 +196,11 @@ function getStocksTracked(){
 
     httpRequest.onreadystatechange = function () {
         var row = JSON.parse(this.responseText);
-        console.log('db has stocks ');
         console.log(row);
+        console.log('db has stocks ');
+        row.forEach(element => {
+            console.log(element.symbol);
+        });
     }
     httpRequest.open("GET", url, true);
     httpRequest.send();
