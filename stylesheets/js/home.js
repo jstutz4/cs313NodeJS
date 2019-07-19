@@ -307,7 +307,7 @@ function getStocksInvested(){
 function removeStock(button){
     var symbol = button.className;
 
-    var url = '/stockremove?symbol=' + symbol;
+    var url = '/removestock?symbol=' + symbol;
     var table;
         var httpRequest = new XMLHttpRequest();
 
