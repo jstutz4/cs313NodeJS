@@ -18,7 +18,7 @@ const pool = new Pool({
 function connect(search) {
     const TOKEN = 'sk_b5530272bb59484ca109ca4c5e819852';
     stream = request({
-        url: 'https://cloud.iexapis.com/v1/stock/' + search + '/quote?token=' + TOKEN,
+        url: 'https://cloud.iexapis.com/stable/stock/' + search + '/quote?token=' + TOKEN,
         //url: 'https://cloud.iexapis.com/v1/tops?token='+TOKEN+'&symbols='+ search,
         headers: {
             'Content-Type': 'text/event-stream'
