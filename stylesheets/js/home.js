@@ -314,7 +314,7 @@ function removeStock(button){
         httpRequest.onreadystatechange = function () {
             
             console.log('did it work');
-            console.log(this.responseText.row)
+            console.log(this.responseText)
             runtwo();
             
         }

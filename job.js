@@ -376,14 +376,13 @@ function getAllInvestments(req, res){
 
 function removeStock(req, res){
     console.log("deleting")
-
+    console.log(req.query.symbol);
     var sql = ("DELETE FROM stockstracked WHERE symbol=$2::text");
     var params = [req.query.symbol];    
     console.log(sql);
     pool.query(sql, params, function (error, result) {
         if (error) console.log(error);
 
-        console.log("found DB " + JSON.stringify(result.rows))
         res.render("pages/sDisplay", {'row':'we have deleted well'} );
     });
 }
