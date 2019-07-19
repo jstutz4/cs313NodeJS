@@ -369,8 +369,7 @@ function getAllInvestments(req, res){
         if (error) console.log(error);
 
         console.log("found DB " + JSON.stringify(result.rows))
-
-        
+        res.render("pages/sDisplay", {'row':JSON.stringify(result.rows)});
     });
 }
 
