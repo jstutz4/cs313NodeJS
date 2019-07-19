@@ -376,7 +376,7 @@ function getAllInvestments(req, res){
 function removeStock(req, res){
     console.log("deleting")
     console.log(req.query.symbol);
-    var sql = ("DELETE FROM stockstracked WHERE symbol=$2::text");
+    var sql = ("DELETE FROM stockstracked WHERE symbol=$1::text");
     var params = [req.query.symbol];    
     console.log(sql);
     pool.query(sql, params, function (error, result) {
