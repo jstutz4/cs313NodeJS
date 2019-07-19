@@ -370,7 +370,21 @@ function getAllInvestments(req, res){
 
         console.log("found DB " + JSON.stringify(result.rows))
 
-        res.render('pages/sDisplay', {'row': JSON.stringify(result.rows)});
+        
+    });
+}
+
+function removeStock(req, res){
+    console.log("deleting")
+
+    var sql = ("DELETE FROM stockstracked WHERE symbol=$2::text");
+    var params = [req.query.symbol];    
+    console.log(sql);
+    pool.query(sql, params, function (error, result) {
+        if (error) console.log(error);
+
+        console.log("found DB " + JSON.stringify(result.rows))
+        res.render("pages/sDisplay", {'row':'we have deleted well'} );
     });
 }
 
@@ -387,5 +401,6 @@ app.get('/addinvest', addinvestment)
 app.get('/allstocks', getAllTrackStocks)
 app.get('/insertinvest', insertInvestment)
 app.get('/allinvestments', getAllInvestments)
+app.get('/removestock', removeStock)
 
 app.listen(PORT, () => console.log(`Listening on ${PORT}`))
