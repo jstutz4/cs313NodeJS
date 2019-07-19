@@ -88,7 +88,7 @@ function displayTable(obj) {
     var hTable = '';
     var table = document.getElementById('tTable').innerHTML;
     var fTable = '</table>';
-    var remove = '<input type="button" value="delete stock" onclick="removeStock("'+obj.symbol+'")">';
+    var remove = '<input type="button" value="delete stock" onclick="removeStock(\"'+obj.symbol+'\")">';
 
     button = '<input type="button" name="' + obj.symbol + '" value="Invest Stock" onclick="investStock(this)">';
     table += '<tr class=' + obj.symbol + '"><td name="' + obj.symbol + '">' + obj.symbol + '</td><td name="' + obj.symbol + '">$' + obj.latestPrice + '</td><td name="' + obj.symbol + '">' + ((obj.avgTotalVolume / 1000000).toFixed(2)) + '</td><td>$'+ obj.high+'</td><td>$'+obj.low+'</td><td>'+(obj.changePercent*100).toFixed(3)+'%</td><td><input id="price'+obj.symbol+ '" placeholder="$100" type="decimal" name="'+obj.symbol+'"></td><td>' + button + "</td><td>"+remove+"</td></tr>";
