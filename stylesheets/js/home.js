@@ -178,7 +178,7 @@ function getInvest(obj){
                 }
             }
             if(!duplicate){
-                table += '<tr class="'+symbol +'" ><td>'+symbol+'</td><td id="ns'+symbol+'">'+row.numstocks+'</td><td id="a'+symbol + '">'+row.amount+'</td><td></td><td></td><td>'+sell+'</td></tr>';
+                table += '<tr class="'+symbol +'" ><td>'+symbol+'</td><td id="ns'+symbol+'">'+(row.numstocks).toFixed(3)+'</td><td id="a'+symbol + '">'+(row.amount).toFixed(3)+'</td><td></td><td></td><td>'+sell+'</td></tr>';
                 document.getElementById('iTable').innerHTML = table;
             }
         }
