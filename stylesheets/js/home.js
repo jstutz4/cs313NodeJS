@@ -153,7 +153,7 @@ function getInvest(obj){
     var url = '/addinvest?symbol=' + symbol + '&numstocks=' + numStocks + '&amount=' + amount;
     console.log('url:  ' + url);
     var httpRequest = new XMLHttpRequest();
-    var sell = '<input type="button" value="Sell Stock" class="'+obj.symbol+'onclick="sellInvest(this)">';
+    
     httpRequest.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             console.log(this.responseText);
@@ -279,7 +279,8 @@ function getStocksInvested(){
         var httpRequest = new XMLHttpRequest();
 
         httpRequest.onreadystatechange = function () {
-            
+            var sell = '<input type="button" value="Sell Stock" class="'+obj.symbol+'onclick="sellInvest(this)">';
+    '</td><td></td><td></td><td>'+sell+'</td></tr>'
 
             if(!stop2){
             console.log(this.responseText);
@@ -287,10 +288,10 @@ function getStocksInvested(){
             console.log(row.length);
                 for(let i = 0; i < row.length; i++){
                     if(i == 0){
-                    table = '<tr class="'+row[i].symbol +'" ><td>'+row[i].symbol+'</td><td id="ns'+row[i].symbol+'">'+row[i].numstocks+'</td><td id="a'+row[i].symbol + '">'+row[i].amount+'</td></tr>'
+                    table = '<tr class="'+row[i].symbol +'" ><td>'+row[i].symbol+'</td><td id="ns'+row[i].symbol+'">'+row[i].numstocks+'</td><td id="a'+row[i].symbol + '">'+row[i].amount+'</td><td></td><td></td><td>'+sell+'</td></tr>';
                     }
                     else{
-                        table += '<tr class="'+row[i].symbol +'" ><td>'+row[i].symbol+'</td><td id="ns'+row[i].symbol+'">'+row[i].numstocks+'</td><td id="a'+row[i].symbol + '">'+row[i].amount+'</td></tr>'
+                        table += '<tr class="'+row[i].symbol +'" ><td>'+row[i].symbol+'</td><td id="ns'+row[i].symbol+'">'+row[i].numstocks+'</td><td id="a'+row[i].symbol + '">'+row[i].amount+'</td><td></td><td></td><td>'+sell+'</td></tr>';
                     }
                     
                 }
