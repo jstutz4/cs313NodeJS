@@ -320,7 +320,7 @@ function removeStock(button){
             console.log('did it work');
             console.log(this.responseText);
             //stop = false;
-            runtwo(null);
+            runtwo(getStocksInvested);
             
         }
         httpRequest.open("GET", url, true);
