@@ -355,6 +355,7 @@ function removeStock(button){
             console.log(this.responseText);
             stop = false;
             console.log(stop);
+            document.getElementById('tTable').innerHTML = "";
             getStocksTracked(null);
             
         }
