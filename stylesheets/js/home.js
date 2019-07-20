@@ -327,7 +327,7 @@ function removeStock(button){
 
 }
 
-function sellinvest(button){
+function sellInvest(button){
     var symbol = button.className;
 
     var url = '/removeinvest?symbol=' + symbol;
