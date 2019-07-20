@@ -232,7 +232,9 @@ function getStocksTracked(callBack){
                     apiSearch(row[i].symbol, displayTable);
                     stop = true;
                 }
+                if(callBack != null){
                 callBack();
+                }
             }
 
             // row.forEach(element => {
@@ -318,8 +320,8 @@ function removeStock(button){
             
             console.log('did it work');
             console.log(this.responseText);
-            stop = false;
-            runtwo();
+            //stop = false;
+            getStocksTracked(null);
             
         }
         httpRequest.open("GET", url, true);
