@@ -87,6 +87,7 @@ function displayTable(obj) {
 
     var hTable = '';
     var table = document.getElementById('tTable').innerHTML;
+    console.log(table);
     var fTable = '</table>';
     var remove = '<input type="button" value="delete stock" class="'+obj.symbol+'" onclick="removeStock(this)">';
 
@@ -221,7 +222,7 @@ function getStocksTracked(callBack){
         var httpRequest = new XMLHttpRequest();
 
         httpRequest.onreadystatechange = function () {
-           
+           console.log('stop = ', stop);
             if(!stop){
                 console.log(this.responseText);
                 var row = JSON.parse(this.responseText);
@@ -231,9 +232,11 @@ function getStocksTracked(callBack){
                     apiSearch(row[i].symbol, displayTable);
                     stop = true;
                 }
-                if(callBack != null){
+                if(callBack != null || callBack != 'undefined'){
+                    console.log('calling back');
                 callBack();
                 }
+                stop = true;
             }
 
             // row.forEach(element => {
@@ -320,7 +323,7 @@ function removeStock(button){
             console.log('did it work');
             console.log(this.responseText);
             //stop = false;
-            runtwo(getStocksInvested);
+            getStocksTracked();
             
         }
         httpRequest.open("GET", url, true);
