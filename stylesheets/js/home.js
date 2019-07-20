@@ -348,6 +348,7 @@ function removeStock(button){
     var url = '/removestock?symbol=' + symbol;
     var table;
         var httpRequest = new XMLHttpRequest();
+        document.getElementById('tTable').innerHTML = "";
 
         httpRequest.onreadystatechange = function () {
             
@@ -355,7 +356,6 @@ function removeStock(button){
             console.log(this.responseText);
             stop = false;
             console.log(stop);
-            document.getElementById('tTable').innerHTML = "";
             getStocksTracked(null);
             
         }
