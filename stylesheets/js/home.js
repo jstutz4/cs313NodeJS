@@ -157,12 +157,10 @@ function getInvest(obj){
     httpRequest.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             console.log(this.responseText);
-            var row = JSON.parse(this.responseText);
+            var obj2 = JSON.parse(this.responseText);
             sell = '<input type="button" value="Sell Stock" class="'+symbol+'" onclick="sellInvest(this)">';
-            console.log(row);
             //then display table
-            console.log("num Stocks: " + numStocks);
-            console.log("amount invested: " + amount);
+            
             //insertStock({'symbol': symbol, 'numStocks':numStocks, 'amount':amount});
             var table = document.getElementById('iTable').innerHTML;
             var rows = document.getElementById('iTable').children;
@@ -171,14 +169,14 @@ function getInvest(obj){
                 for(let i = 0; i < rows.length; i++){
                     if(rows[i].className == symbol){
                         console.log('duplicate addition')
-                        document.getElementById('ns' + symbol).innerHTML = row.numstocks;
-                        document.getElementById('a'+ symbol).innerHTML = row.amount;
+                        document.getElementById('ns' + symbol).innerHTML = obj2.numstocks;
+                        document.getElementById('a'+ symbol).innerHTML = obj2.amount;
                         duplicate = true;
                     }
                 }
             }
             if(!duplicate){
-                table += '<tr class="'+symbol +'" ><td>'+symbol+'</td><td id="ns'+symbol+'">'+(row.numstocks).toFixed(3)+'</td><td id="a'+symbol + '">'+(row.amount).toFixed(3)+'</td><td></td><td></td><td>'+sell+'</td></tr>';
+                table += '<tr class="'+symbol +'" ><td>'+symbol+'</td><td id="ns'+symbol+'">'+numStocks+'</td><td id="a'+symbol + '">'+amount+'</td><td></td><td></td><td>'+sell+'</td></tr>';
                 document.getElementById('iTable').innerHTML = table;
             }
         }
