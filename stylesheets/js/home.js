@@ -153,7 +153,7 @@ function getInvest(obj){
     var url = '/addinvest?symbol=' + symbol + '&numstocks=' + numStocks + '&amount=' + amount;
     console.log('url:  ' + url);
     var httpRequest = new XMLHttpRequest();
-
+    var sell = '<input type="button" value="Sell Stock" class="'+obj.symbol+'onclick="sellInvest(this)">';
     httpRequest.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             console.log(this.responseText);
@@ -177,7 +177,7 @@ function getInvest(obj){
                 }
             }
             if(!duplicate){
-                table += '<tr class="'+symbol +'" ><td>'+symbol+'</td><td id="ns'+symbol+'">'+obj.numstocks+'</td><td id="a'+symbol + '">'+obj.amount+'</td></tr>'
+                table += '<tr class="'+symbol +'" ><td>'+symbol+'</td><td id="ns'+symbol+'">'+obj.numstocks+'</td><td id="a'+symbol + '">'+obj.amount+'</td><td></td><td></td><td>'+sell+'</td></tr>';
                 document.getElementById('iTable').innerHTML = table;
             }
         }
