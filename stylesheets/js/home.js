@@ -355,7 +355,7 @@ function removeStock(button){
             console.log(this.responseText);
             stop = false;
             console.log(stop);
-            getStocksTracked2();
+            getStocksTracked(null);
             
         }
         httpRequest.open("GET", url, true);

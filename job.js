@@ -270,7 +270,7 @@ function getAllTrackStocks(req, res){
     getAllFromTable('stockstracked', 'symbol', function(err, results){
         console.log('all stocks ');
         console.log(JSON.stringify(results));
-        res.render("pages/sDisplay", {'row':JSON.stringify(results.rows)});
+        res.render("pages/sDisplay", {'row':JSON.stringify(results)});
     });
 }
 
