@@ -263,7 +263,7 @@ function getStocksTracked2(){
                 console.log(row);
                 console.log('db has stocks ');
                  document.getElementById('tTable').innerHTML = "";
-
+                console.log('row ' + row.length);
                 for(let i = 0; i < row.length; i++){
                     apiSearch(row[i].symbol, displayTable);
                     stop = true;
