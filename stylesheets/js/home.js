@@ -262,6 +262,8 @@ function getStocksTracked2(){
                 var row = JSON.parse(this.responseText);
                 console.log(row);
                 console.log('db has stocks ');
+                 document.getElementById('tTable').innerHTML = "";
+
                 for(let i = 0; i < row.length; i++){
                     apiSearch(row[i].symbol, displayTable);
                 }
