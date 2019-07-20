@@ -318,7 +318,7 @@ function removeStock(button){
             
             console.log('did it work');
             console.log(this.responseText);
-            //stop = false;
+            stop = false;
             runtwo();
             
         }
