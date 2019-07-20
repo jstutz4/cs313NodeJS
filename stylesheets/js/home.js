@@ -157,8 +157,9 @@ function getInvest(obj){
     httpRequest.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             console.log(this.responseText);
-            var obj = JSON.parse(this.responseText);
-            console.log(obj);
+            var row = JSON.parse(this.responseText);
+            sell = '<input type="button" value="Sell Stock" class="'+symbol+'" onclick="sellInvest(this)">';
+            console.log(row);
             //then display table
             console.log("num Stocks: " + numStocks);
             console.log("amount invested: " + amount);
@@ -170,14 +171,14 @@ function getInvest(obj){
                 for(let i = 0; i < rows.length; i++){
                     if(rows[i].className == symbol){
                         console.log('duplicate addition')
-                        document.getElementById('ns' + symbol).innerHTML = obj.numstocks;
-                        document.getElementById('a'+ symbol).innerHTML = obj.amount;
+                        document.getElementById('ns' + symbol).innerHTML = row.numstocks;
+                        document.getElementById('a'+ symbol).innerHTML = row.amount;
                         duplicate = true;
                     }
                 }
             }
             if(!duplicate){
-                table += '<tr class="'+symbol +'" ><td>'+symbol+'</td><td id="ns'+symbol+'">'+obj.numstocks+'</td><td id="a'+symbol + '">'+obj.amount+'</td><td></td><td></td><td>'+sell+'</td></tr>';
+                table += '<tr class="'+symbol +'" ><td>'+symbol+'</td><td id="ns'+symbol+'">'+row.numstocks+'</td><td id="a'+symbol + '">'+row.amount+'</td><td></td><td></td><td>'+sell+'</td></tr>';
                 document.getElementById('iTable').innerHTML = table;
             }
         }
