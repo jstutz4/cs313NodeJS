@@ -276,7 +276,7 @@ function getStocksTracked(callBack){
 function getStocksInvested(){
     //read from the data base
     var url = '/allinvestments'
-    var table;
+    var table= "";
     var sell;
         var httpRequest = new XMLHttpRequest();
 
@@ -319,7 +319,7 @@ function removeStock(button){
             
             console.log('did it work');
             console.log(this.responseText);
-            //stop = false;
+            stop = false;
             getStocksTracked(null);
             
         }
