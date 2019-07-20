@@ -224,13 +224,13 @@ function getStocksTracked(callBack){
         httpRequest.onreadystatechange = function () {
            console.log('stop = ', stop);
             if(!stop){
-                stop = true;
                 console.log(this.responseText);
                 var row = JSON.parse(this.responseText);
                 console.log(row);
                 console.log('db has stocks ');
                 for(let i = 0; i < row.length; i++){
                     apiSearch(row[i].symbol, displayTable);
+                    stop = true;
                 }
             }
 
