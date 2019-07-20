@@ -232,6 +232,8 @@ function getStocksTracked(callBack){
                     apiSearch(row[i].symbol, displayTable);
                     stop = true;
                 }
+                stop = true;
+                callBack();
             }
 
             // row.forEach(element => {
@@ -245,7 +247,7 @@ function getStocksTracked(callBack){
                 //call apiseach with display
 }
 
-function getStocksTracked2(callBack){
+function getStocksTracked2(){
     //read from the data base
     var url = '/allstocks'
     //stop = false;
@@ -261,7 +263,7 @@ function getStocksTracked2(callBack){
                 console.log(row);
                 console.log('db has stocks ');
                 for(let i = 0; i < row.length; i++){
-                    //apiSearch(row[i].symbol, displayTable);
+                    apiSearch(row[i].symbol, displayTable);
                 }
            // }
 
