@@ -224,20 +224,46 @@ function getStocksTracked(callBack){
         httpRequest.onreadystatechange = function () {
            console.log('stop = ', stop);
             if(!stop){
+                stop = true;
                 console.log(this.responseText);
                 var row = JSON.parse(this.responseText);
                 console.log(row);
                 console.log('db has stocks ');
                 for(let i = 0; i < row.length; i++){
                     apiSearch(row[i].symbol, displayTable);
-                    stop = true;
                 }
-                if(callBack != null || callBack != 'undefined'){
-                    console.log('calling back');
-                callBack();
-                }
-                stop = true;
             }
+
+            // row.forEach(element => {
+            //     console.log(element.symbol);
+            //     apiSearch(element.symbol, displayTable);
+            // });
+        }
+        httpRequest.open("GET", url, true);
+        httpRequest.send();
+            //call back to new function
+                //call apiseach with display
+}
+
+function getStocksTracked2(callBack){
+    //read from the data base
+    var url = '/allstocks'
+    //stop = false;
+    
+        var httpRequest = new XMLHttpRequest();
+
+        httpRequest.onreadystatechange = function () {
+           console.log('stop = ', stop);
+           // if(!stop){
+                stop = true;
+                console.log(this.responseText);
+                var row = JSON.parse(this.responseText);
+                console.log(row);
+                console.log('db has stocks ');
+                for(let i = 0; i < row.length; i++){
+                    apiSearch(row[i].symbol, displayTable);
+                }
+           // }
 
             // row.forEach(element => {
             //     console.log(element.symbol);
@@ -322,8 +348,8 @@ function removeStock(button){
             
             console.log('did it work');
             console.log(this.responseText);
-            stop = false;
-            getStocksTracked();
+            //stop = false;
+            getStocksTracked2();
             
         }
         httpRequest.open("GET", url, true);
