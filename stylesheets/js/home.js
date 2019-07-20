@@ -318,7 +318,7 @@ function removeStock(button){
             
             console.log('did it work');
             console.log(this.responseText);
-            //stop = false;
+            stop = false;
             runtwo();
             
         }
@@ -338,7 +338,7 @@ function sellInvest(button){
             
             console.log('did it work');
             console.log(this.responseText);
-            //stop2 = false;
+            stop2 = false;
             getStocksInvested();
             
         }
