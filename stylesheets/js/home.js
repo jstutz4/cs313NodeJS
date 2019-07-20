@@ -327,6 +327,26 @@ function removeStock(button){
 
 }
 
+function removeinvest(button){
+    var symbol = button.className;
+
+    var url = '/removeinvest?symbol=' + symbol;
+    var table;
+        var httpRequest = new XMLHttpRequest();
+
+        httpRequest.onreadystatechange = function () {
+            
+            console.log('did it work');
+            console.log(this.responseText);
+            //stop = false;
+            runtwo();
+            
+        }
+        httpRequest.open("GET", url, true);
+        httpRequest.send();
+
+}
+
 function runtwo(){
     //getStocksInvested();
 

@@ -386,6 +386,19 @@ function removeStock(req, res){
     });
 }
 
+function removeInvest(req, res){
+    console.log("deleting")
+    console.log(req.query.symbol);
+    var sql = ("DELETE FROM stocksinvested WHERE symbol=$1::text");
+    var params = [req.query.symbol];    
+    console.log(sql);
+    pool.query(sql, params, function (error, result) {
+        if (error) console.log(error);
+
+        res.render("pages/sDisplay", {'row':'we have deleted well'} );
+    });
+}
+
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs');
 app.use(express.static("stylesheets"));
@@ -400,5 +413,7 @@ app.get('/allstocks', getAllTrackStocks)
 app.get('/insertinvest', insertInvestment)
 app.get('/allinvestments', getAllInvestments)
 app.get('/removestock', removeStock)
+app.get('/removeinvest', removeInvest)
+
 
 app.listen(PORT, () => console.log(`Listening on ${PORT}`))
