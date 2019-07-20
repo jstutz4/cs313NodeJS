@@ -288,7 +288,7 @@ function getStocksInvested(){
             console.log(row.length);
 
                 for(let i = 0; i < row.length; i++){
-                    sell = '<input type="button" value="Sell Stock" class="'+row[i].symbol+'onclick="sellInvest(this)">';
+                    sell = '<input type="button" value="Sell Stock" class="'+row[i].symbol+'" onclick="sellInvest(this)">';
                     if(i == 0){
                     table = '<tr class="'+row[i].symbol +'" ><td>'+row[i].symbol+'</td><td id="ns'+row[i].symbol+'">'+row[i].numstocks+'</td><td id="a'+row[i].symbol + '">'+row[i].amount+'</td><td></td><td></td><td>'+sell+'</td></tr>';
                     }
@@ -327,7 +327,7 @@ function removeStock(button){
 
 }
 
-function removeinvest(button){
+function sellinvest(button){
     var symbol = button.className;
 
     var url = '/removeinvest?symbol=' + symbol;
