@@ -256,7 +256,7 @@ function getStocksTracked2(){
 
         httpRequest.onreadystatechange = function () {
            console.log('stop = ', stop);
-           // if(!stop){
+            if(!stop){
                 stop = true;
                 console.log(this.responseText);
                 var row = JSON.parse(this.responseText);
@@ -266,8 +266,9 @@ function getStocksTracked2(){
 
                 for(let i = 0; i < row.length; i++){
                     apiSearch(row[i].symbol, displayTable);
+                    stop = true;
                 }
-           // }
+            }
 
             // row.forEach(element => {
             //     console.log(element.symbol);
@@ -353,6 +354,7 @@ function removeStock(button){
             console.log('did it work');
             console.log(this.responseText);
             //stop = false;
+            console.log(stop);
             getStocksTracked2();
             
         }
