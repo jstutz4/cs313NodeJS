@@ -338,9 +338,8 @@ function sellInvest(button){
             
             console.log('did it work');
             console.log(this.responseText);
-            stop2 = false;
-            stop= false;
-            runtwo();
+            //stop2 = false;
+            getStocksInvested();
             
         }
         httpRequest.open("GET", url, true);
