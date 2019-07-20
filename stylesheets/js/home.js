@@ -276,17 +276,19 @@ function getStocksInvested(){
     //read from the data base
     var url = '/allinvestments'
     var table;
+    var sell;
         var httpRequest = new XMLHttpRequest();
 
         httpRequest.onreadystatechange = function () {
-            var sell = '<input type="button" value="Sell Stock" class="'+obj.symbol+'onclick="sellInvest(this)">';
-    '</td><td></td><td></td><td>'+sell+'</td></tr>'
+    
 
             if(!stop2){
             console.log(this.responseText);
             var row = JSON.parse(this.responseText);
             console.log(row.length);
+
                 for(let i = 0; i < row.length; i++){
+                    sell = '<input type="button" value="Sell Stock" class="'+row[i].symbol+'onclick="sellInvest(this)">';
                     if(i == 0){
                     table = '<tr class="'+row[i].symbol +'" ><td>'+row[i].symbol+'</td><td id="ns'+row[i].symbol+'">'+row[i].numstocks+'</td><td id="a'+row[i].symbol + '">'+row[i].amount+'</td><td></td><td></td><td>'+sell+'</td></tr>';
                     }
