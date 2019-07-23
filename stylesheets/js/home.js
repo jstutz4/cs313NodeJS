@@ -360,11 +360,11 @@ function getAllInvestCallback(price, row){
                     table += '<tr class="'+row.symbol +'" ><td>'+row.symbol+'</td><td id="ns'+row.symbol+'">'+row.numstocks+'</td><td id="a'+row.symbol + '">'+row.amount+'</td><td id="dollar'+row.symbol+'">$'+((row.numStocks* price)-row.amount).toFixed(2)+'</td><td id="pre'+row.symbol+'">'+((((Number(row.numstocks)*Number(price))/Number(row.amount))-1)*100).toFixed(2) + '%';+'</td><td>'+sell+'</td></tr>';
                 }
                 
-            }
+           // }
             stop2 = true;
             console.log('only once');
             document.getElementById('iTable').innerHTML = table;
-      //  }
+    }
 }
 function removeStock(button){
     var symbol = button.className;
