@@ -373,7 +373,7 @@ function getAllInvestCallback(price, row){
             console.log(table);
                 
            // }
-            stop2 = true;
+            //stop2 = true;
             console.log('only once');
             document.getElementById('iTable').innerHTML = table;
     //}
