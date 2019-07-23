@@ -432,6 +432,7 @@ function sellInvest(button){
 
 function runtwo(){
     //getStocksInvested();
+    document.getElementById('iTable').innerHTML = "";
     getStocksTracked(getStocksInvested);
 }
 runtwo();
