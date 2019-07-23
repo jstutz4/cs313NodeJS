@@ -12,12 +12,13 @@ function apiSearch(symbol, callBack, investing) {
             var obj = JSON.parse(this.responseText);
             console.log(investing);
             console.log(typeof(investing));
-           if(typeof(investing) == 'undefinded'){
             callBack(obj);
+
+           if(typeof(investing) == 'undefinded'){
            }
            else{
             console.log('investing running')
-            callBack(obj.latestPrice, investing);
+            //callBack(obj.latestPrice, investing);
            }
         }
     }
