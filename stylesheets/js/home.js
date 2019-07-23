@@ -335,9 +335,12 @@ function getStocksInvested(obj){
             console.log(this.responseText);
             var row = JSON.parse(this.responseText);
             console.log(row.length);
+            if(!stop2){
             for(let i = 0; i < row.length; i++){
                 apiSearch(row[i].symbol,getAllInvestCallback,row[i])
             }
+            stop2 = true;
+        }
 
             
         }
@@ -347,11 +350,13 @@ function getStocksInvested(obj){
                 //call apiseach with display
 }
 function getAllInvestCallback(price, row){
+    var table;
+    var sell;
     console.log("we are in the invest call back");
-    if(!stop2){
-    console.log("we are loopuing in calback");
+    // if(!stop2){
+    // console.log("we are loopuing in calback");
 
-        var table = document.getElementById('iTable').innerHTML;
+         table = document.getElementById('iTable').innerHTML;
 
             //for(let i = 0; i < row.length; i++){
                 sell = '<input type="button" value="Sell Stock" class="'+row.symbol+'" onclick="sellInvest(this)">';
@@ -367,7 +372,7 @@ function getAllInvestCallback(price, row){
             stop2 = true;
             console.log('only once');
             document.getElementById('iTable').innerHTML = table;
-    }
+    //}
 }
 function removeStock(button){
     var symbol = button.className;
