@@ -377,7 +377,7 @@ function getAllInvestCallback(price, row){
             console.log('\nlisting info\n');
 
             console.log(sell);
-            console.log(table);
+            console.log(row);
            // }
             //stop2 = true;
             console.log('only once');
