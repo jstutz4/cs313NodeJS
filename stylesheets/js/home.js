@@ -172,16 +172,16 @@ function getInvest(obj){
                         console.log('duplicate addition')
                         document.getElementById('ns' + symbol).innerHTML = obj2.numstocks;
                         document.getElementById('a'+ symbol).innerHTML = obj2.amount;
-                        document.getElementById('dollar'+ symbol).innerHTML = ((obj2.numstocks*obj.latestPrice)-obj2.amount).toFixed(3);
+                        document.getElementById('dollar'+ symbol).innerHTML = ((obj2.numstocks*obj.latestPrice)-obj2.amount).toFixed(2);
                         console.log('list info ');
-                        console.log(obj2.newStock, obj.latestPrice);
-                        document.getElementById('pre'+ symbol).innerHTML = ((((Number(obj2.numstocks)*Number(obj.latestPrice))/Number(obj2.amount))-1)*100).toFixed(3);
+                        console.log(obj2.numstocks,obj2.amount, obj.latestPrice);
+                        document.getElementById('pre'+ symbol).innerHTML = ((((Number(obj2.numstocks)*Number(obj.latestPrice))/Number(obj2.amount))-1)*100).toFixed(2);
                         duplicate = true;
                     }
                 }
             }
             if(!duplicate){
-                table += '<tr class="'+symbol +'" ><td>'+symbol+'</td><td id="ns'+symbol+'">'+numStocks+'</td><td id="a'+symbol + '">'+amount+'</td><td id="dollar'+symbol+'">$'+((numStocks* obj.latestPrice)-amount).toFixed(3)+'</td><td id="pre'+symbol+'">0.00%</td><td>'+sell+'</td></tr>';
+                table += '<tr class="'+symbol +'" ><td>'+symbol+'</td><td id="ns'+symbol+'">'+numStocks+'</td><td id="a'+symbol + '">'+amount+'</td><td id="dollar'+symbol+'">$'+((numStocks* obj.latestPrice)-amount).toFixed(2)+'</td><td id="pre'+symbol+'">0.00%</td><td>'+sell+'</td></tr>';
                 document.getElementById('iTable').innerHTML = table;
             }
         }
