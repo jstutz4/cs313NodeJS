@@ -191,7 +191,7 @@ function getInvest(obj){
                 }
             }
             if(!duplicate){
-                table += '<tr class="'+symbol +'" ><td>'+symbol+'</td><td id="ns'+symbol+'">'+numStocks+'</td><td id="a'+symbol + '">'+amount+'</td><td id="dollar'+symbol+'">$'+((numStocks* obj.latestPrice.toFixed(2)).toFixed(3)-amount).toFixed(2)+'</td><td id="pre'+symbol+'">0.00%</td><td>'+sell+'</td></tr>';
+                table += '<tr class="'+symbol +'" ><td>'+symbol+'</td><td id="ns'+symbol+'">'+numStocks+'</td><td id="a'+symbol + '">'+amount+'</td><td id="dollar'+symbol+'">$'+((numStocks* (obj.latestPrice).toFixed(2))-amount).toFixed(2)+'</td><td id="pre'+symbol+'">0.00%</td><td>'+sell+'</td></tr>';
                 console.log(numStocks);
                 console.log(obj.latestPrice);
                 console.log(amount);
@@ -352,12 +352,13 @@ function getAllInvestCallback(price, row){
 
             //for(let i = 0; i < row.length; i++){
                 sell = '<input type="button" value="Sell Stock" class="'+row.symbol+'" onclick="sellInvest(this)">';
-                // if(i == 0){
-                // table = '<tr class="'+row[i].symbol +'" ><td>'+row[i].symbol+'</td><td id="ns'+row[i].symbol+'">'+row[i].numstocks+'</td><td id="a'+row[i].symbol + '">'+row[i].amount+'</td><td id="dollar'+row[i].symbol+'">$'+((row[i].numStocks* obj.latestPrice)-row[i].amount).toFixed(2)+'</td><td id="pre'+row[i].symbol+'">'+((((Number(row[i].numstocks)*Number(obj.latestPrice))/Number(row[i].amount))-1)*100).toFixed(2) + '%';+'</td><td>'+sell+'</td></tr>';
-                // }
-               // else{
-                    table += '<tr class="'+row.symbol +'" ><td>'+row.symbol+'</td><td id="ns'+row.symbol+'">'+row.numstocks+'</td><td id="a'+row.symbol + '">'+row.amount+'</td><td id="dollar'+row.symbol+'">$'+((row.numStocks* price)-row.amount).toFixed(2)+'</td><td id="pre'+row.symbol+'">'+((((Number(row.numstocks)*Number(price))/Number(row.amount))-1)*100).toFixed(2) + '%';+'</td><td>'+sell+'</td></tr>';
-                //}
+                if(i == 0){
+                //table = '<tr class="'+row[i].symbol +'" ><td>'+row[i].symbol+'</td><td id="ns'+row[i].symbol+'">'+row[i].numstocks+'</td><td id="a'+row[i].symbol + '">'+row[i].amount+'</td><td id="dollar'+row[i].symbol+'">$'+((row[i].numStocks* obj.latestPrice)-row[i].amount).toFixed(2)+'</td><td id="pre'+row[i].symbol+'">'+((((Number(row[i].numstocks)*Number(obj.latestPrice))/Number(row[i].amount))-1)*100).toFixed(2) + '%';+'</td><td>'+sell+'</td></tr>';
+                table += '<tr class="'+row.symbol +'" ><td>'+row.symbol+'</td><td id="ns'+row.symbol+'">'+row.numstocks+'</td><td id="a'+row.symbol + '">'+row.amount+'</td><td id="dollar'+row.symbol+'">$'+((row.numStocks* price)-row.amount).toFixed(2)+'</td><td id="pre'+row.symbol+'">'+((((Number(row.numstocks)*Number(price))/Number(row.amount))-1)*100).toFixed(2) + '%';+'</td><td>'+sell+'</td></tr>';
+                }
+               else{
+                    //table += '<tr class="'+row.symbol +'" ><td>'+row.symbol+'</td><td id="ns'+row.symbol+'">'+row.numstocks+'</td><td id="a'+row.symbol + '">'+row.amount+'</td><td id="dollar'+row.symbol+'">$'+((row.numStocks* price)-row.amount).toFixed(2)+'</td><td id="pre'+row.symbol+'">'+((((Number(row.numstocks)*Number(price))/Number(row.amount))-1)*100).toFixed(2) + '%';+'</td><td>'+sell+'</td></tr>';
+                }
                 
           //  }
             stop2 = true;
