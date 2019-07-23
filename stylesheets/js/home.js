@@ -180,12 +180,15 @@ function getInvest(obj){
                 for(let i = 0; i < rows.length; i++){
                     if(rows[i].className == symbol){
                         console.log('duplicate addition')
+                        let tempNumStock = obj2.numstocks.toFixed(2);
+                        let tempPrice = obj.latestPrice.toFixed(2);
+                        tempNumStock
                         document.getElementById('ns' + symbol).innerHTML = obj2.numstocks;
                         document.getElementById('a'+ symbol).innerHTML = obj2.amount;
-                        document.getElementById('dollar'+ symbol).innerHTML = '$'+((obj2.numstocks*obj.latestPrice)-obj2.amount).toFixed(2);
+                        document.getElementById('dollar'+ symbol).innerHTML = '$'+((tempNumStock*tempPrice)-obj2.amount).toFixed(2);
                         console.log('list info ');
-                        console.log(obj2.numstocks,obj2.amount, obj.latestPrice);
-                        document.getElementById('pre'+ symbol).innerHTML = ((((Number(obj2.numstocks)*Number(obj.latestPrice))/Number(obj2.amount))-1)*100).toFixed(2) + '%';
+                        console.log(tempNumStock,obj2.amount, tempPrice);
+                        document.getElementById('pre'+ symbol).innerHTML = ((((Number(tempNumStock)*Number(tempPrice))/Number(obj2.amount))-1)*100).toFixed(2) + '%';
                         duplicate = true;
                     }
                 }
