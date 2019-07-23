@@ -10,6 +10,7 @@ function apiSearch(symbol, callBack, investing) {
     httpRequest.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             var obj = JSON.parse(this.responseText);
+            console.log(investing);
            if(investing.symbol != null || investing == 'undefinded'){
                callBack(obj.latestPrice, investing);
            }
