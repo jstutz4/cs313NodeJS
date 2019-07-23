@@ -14,7 +14,7 @@ function apiSearch(symbol, callBack, investing) {
             console.log(typeof(investing));
             callBack(obj);
 
-           if(typeof(investing) === "undefinded"){
+           if(typeof(investing) === "undefined"){
             console.log('running well');
 
            }
