@@ -364,8 +364,7 @@ function getAllInvestCallback(price, row){
             //console.log(table);
             //for(let i = 0; i < row.length; i++){
             sell = '<input type="button" value="Sell Stock" class="'+row.symbol+'" onclick="sellInvest(this)">';
-            table += '<tr class="'+row.symbol +'" ><td>'+row.symbol+'</td><td id="ns'+row.symbol+'">'+row.numstocks+'</td><td id="a'+row.symbol + '">'+row.amount+'</td></tr>';
-            //<td id="dollar'+row.symbol+'">$'+(row.numstocks*price)-row.amount+'</td><td id="pre'+row.symbol+'">0.00%</td><td>'+sell+'</td></tr>';
+            table += '<tr class="'+row.symbol +'" ><td>'+row.symbol+'</td><td id="ns'+row.symbol+'">'+row.numstocks+'</td><td id="a'+row.symbol + '">'+row.amount+'</td><td id="dollar'+row.symbol+'">$'+(row.numstocks*price)-row.amount+'</td><td id="pre'+row.symbol+'">0.00%</td><td>'+sell+'</td></tr>';
             //table += '<tr class="'+symbol +'" ><td>'+symbol+'</td><td id="ns'+symbol+'">'+numStocks+'</td><td id="a'+symbol + '">'+amount+'</td><td id="dollar'+symbol+'">$'+0.00+'</td><td id="pre'+symbol+'">0.00%</td><td>'+sell+'</td></tr>';
             
             document.getElementById('iTable').innerHTML = table;
