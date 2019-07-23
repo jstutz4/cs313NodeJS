@@ -14,7 +14,9 @@ function apiSearch(symbol, callBack, investing) {
             console.log(typeof(investing));
             callBack(obj);
 
-           if(typeof(investing) == 'undefinded'){
+           if(typeof(investing) === "undefinded"){
+            console.log('running well');
+
            }
            else{
             console.log('investing running')
@@ -154,7 +156,7 @@ function investStock(button) {
 
 function getInvest(obj){
     var amount = document.getElementById("price"+obj.symbol).value;
-    var numStocks = (amount/obj.latestPrice).toFixed(3);
+    var numStocks = (amount/obj.latestPrice.toFixed(2)).toFixed(3);
     var symbol = obj.symbol;
     var duplicate = false;
     //get information
