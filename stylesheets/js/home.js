@@ -194,7 +194,7 @@ function getInvest(obj){
                 }
             }
             if(!duplicate){
-                table += '<tr class="'+symbol +'" ><td>'+symbol+'</td><td id="ns'+symbol+'">'+numStocks+'</td><td id="a'+symbol + '">'+amount+'</td><td id="dollar'+symbol+'">$'+((numStocks* (obj.latestPrice).toFixed(2))-amount).toFixed(2)+'</td><td id="pre'+symbol+'">0.00%</td><td>'+sell+'</td></tr>';
+                table += '<tr class="'+symbol +'" ><td>'+symbol+'</td><td id="ns'+symbol+'">'+numStocks+'</td><td id="a'+symbol + '">'+amount+'</td><td id="dollar'+symbol+'">$'+0.00+'</td><td id="pre'+symbol+'">0.00%</td><td>'+sell+'</td></tr>';
                 console.log(numStocks);
                 console.log(obj.latestPrice);
                 console.log(amount);
@@ -370,7 +370,7 @@ function getAllInvestCallback(price, row){
             //    else{
             //         table += '<tr class="'+row.symbol +'" ><td>'+row.symbol+'</td><td id="ns'+row.symbol+'">'+row.numstocks+'</td><td id="a'+row.symbol + '">'+row.amount+'</td><td id="dollar'+row.symbol+'">$'+((row.numStocks* price)-row.amount).toFixed(2)+'</td><td id="pre'+row.symbol+'">'+((((Number(row.numstocks)*Number(price))/Number(row.amount))-1)*100).toFixed(2) + '%';+'</td><td>'+sell+'</td></tr>';
             //     }
-                table += '<tr class="'+row.symbol +'" ><td>'+row.symbol+'</td><td id="ns'+row.symbol+'">'+row.numstocks+'</td><td id="a'+row.symbol + '">'+row.amount+'</td><td id="dollar'+row.symbol+'">$'+((row.numStocks* price)-row.amount)+'</td><td id="pre'+row.symbol+'">'+((((Number(row.numstocks)*Number(price))/Number(row.amount))-1)*100).toFixed(3) + '%'+'</td><td>'+sell+'</td></tr>';
+                table += '<tr class="'+row.symbol +'" ><td>'+row.symbol+'</td><td id="ns'+row.symbol+'">'+row.numstocks+'</td><td id="a'+row.symbol + '">'+row.amount+'</td><td id="dollar'+row.symbol+'">$'+((row.numStocks* price)-row.amount)+'</td><td id="pre'+row.symbol+'">'+((((Number(row.numstocks)*Number(price))/Number(row.amount))-1)*100) + '%'+'</td><td>'+sell+'</td></tr>';
             console.log('\nlisting info\n');
 
             console.log(sell);
