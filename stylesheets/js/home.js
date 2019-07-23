@@ -145,7 +145,7 @@ function investStock(button) {
 
 function getInvest(obj){
     var amount = document.getElementById("price"+obj.symbol).value;
-    var numStocks = (amount/(obj.latestPrice).toFixed(3)).toFixed(3);
+    var numStocks = (amount/obj.latestPrice).toFixed(3);
     var symbol = obj.symbol;
     var duplicate = false;
     //get information
