@@ -347,7 +347,10 @@ function getStocksInvested(obj){
                 //call apiseach with display
 }
 function getAllInvestCallback(price, row){
+    console.log("we are in the invest call back");
     if(!stop2){
+    console.log("we are loopuing in calback");
+
         var table = document.getElementById('iTable').innerHTML;
 
             //for(let i = 0; i < row.length; i++){
