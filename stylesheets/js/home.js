@@ -435,4 +435,3 @@ function runtwo(){
     document.getElementById('iTable').innerHTML = "";
     getStocksTracked(getStocksInvested);
 }
-runtwo();
