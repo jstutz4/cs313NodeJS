@@ -370,8 +370,7 @@ function getAllInvestCallback(price, row){
                 table += '<tr class="'+row.symbol +'" ><td>'+row.symbol+'</td><td id="ns'+row.symbol+'">'+row.numstocks+'</td><td id="a'+row.symbol + '">'+row.amount+'</td><td id="dollar'+row.symbol+'">$'+((row.numStocks* price)-row.amount).toFixed(2)+'</td><td id="pre'+row.symbol+'">'+((((Number(row.numstocks)*Number(price))/Number(row.amount))-1)*100).toFixed(2) + '%';+'</td><td>'+sell+'</td></tr>';
             console.log('\nlisting info\n');
 
-            console.log(row);
-            console.log(row[symbol]);
+            console.log(row.row);
             console.log(row.symbol);
             console.log(price);
            // }
