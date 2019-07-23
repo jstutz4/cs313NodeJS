@@ -363,7 +363,7 @@ function getAllInvestCallback(price, row){
     // console.log("we are loopuing in calback");
 
          table = document.getElementById('iTable').innerHTML;
-            console.log(table);
+            //console.log(table);
             //for(let i = 0; i < row.length; i++){
                 sell = '<input type="button" value="Sell Stock" class="'+row.symbol+'" onclick="sellInvest(this)">';
             //     if(i == 0){
