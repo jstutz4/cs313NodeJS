@@ -1,6 +1,6 @@
 var stop = false;
 var stop2 = false;
-function apiSearch(symbol, callBack) {
+function apiSearch(symbol, callBack, investing) {
     //var search = document.getElementById("sStocks").value;
 
     var url = '/search?search=' + symbol;
@@ -10,7 +10,12 @@ function apiSearch(symbol, callBack) {
     httpRequest.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             var obj = JSON.parse(this.responseText);
+           if(investing.symbol != null || investing == 'undefinded'){
+               callBack(obj.latestPrice, investing);
+           }
+           else{
             callBack(obj);
+           }
         }
     }
     httpRequest.open("GET", url, true);
@@ -172,10 +177,10 @@ function getInvest(obj){
                         console.log('duplicate addition')
                         document.getElementById('ns' + symbol).innerHTML = obj2.numstocks;
                         document.getElementById('a'+ symbol).innerHTML = obj2.amount;
-                        document.getElementById('dollar'+ symbol).innerHTML = ((obj2.numstocks*obj.latestPrice)-obj2.amount).toFixed(2);
+                        document.getElementById('dollar'+ symbol).innerHTML = '$'+((obj2.numstocks*obj.latestPrice)-obj2.amount).toFixed(2);
                         console.log('list info ');
                         console.log(obj2.numstocks,obj2.amount, obj.latestPrice);
-                        document.getElementById('pre'+ symbol).innerHTML = ((((Number(obj2.numstocks)*Number(obj.latestPrice))/Number(obj2.amount))-1)*100).toFixed(2);
+                        document.getElementById('pre'+ symbol).innerHTML = ((((Number(obj2.numstocks)*Number(obj.latestPrice))/Number(obj2.amount))-1)*100).toFixed(2) + '%';
                         duplicate = true;
                     }
                 }
@@ -311,7 +316,7 @@ function getStocksTracked2(){
 //         httpRequest.send();
 // }
 
-function getStocksInvested(){
+function getStocksInvested(obj){
     //read from the data base
     var url = '/allinvestments'
     var table= "";
@@ -319,32 +324,38 @@ function getStocksInvested(){
         var httpRequest = new XMLHttpRequest();
 
         httpRequest.onreadystatechange = function () {
-    
-
-            if(!stop2){
             console.log(this.responseText);
             var row = JSON.parse(this.responseText);
             console.log(row.length);
-
-                for(let i = 0; i < row.length; i++){
-                    sell = '<input type="button" value="Sell Stock" class="'+row[i].symbol+'" onclick="sellInvest(this)">';
-                    if(i == 0){
-                    table = '<tr class="'+row[i].symbol +'" ><td>'+row[i].symbol+'</td><td id="ns'+row[i].symbol+'">'+row[i].numstocks+'</td><td id="a'+row[i].symbol + '">'+row[i].amount+'</td><td></td><td></td><td>'+sell+'</td></tr>';
-                    }
-                    else{
-                        table += '<tr class="'+row[i].symbol +'" ><td>'+row[i].symbol+'</td><td id="ns'+row[i].symbol+'">'+row[i].numstocks+'</td><td id="a'+row[i].symbol + '">'+row[i].amount+'</td><td></td><td></td><td>'+sell+'</td></tr>';
-                    }
-                    
-                }
-                stop2 = true;
-                console.log('only once');
-                document.getElementById('iTable').innerHTML = table;
+            for(let i = 0; i < row.length; i++){
+                apiSearch(row[i].symbol,getAllInvestCallback,row[i])
             }
+
+            
         }
         httpRequest.open("GET", url, true);
         httpRequest.send();
             //call back to new function
                 //call apiseach with display
+}
+function getAllInvestCallback(price, row){
+    //if(!stop2){
+        var table = document.getElementById('iTable').innerHTML;
+
+            //for(let i = 0; i < row.length; i++){
+                sell = '<input type="button" value="Sell Stock" class="'+row.symbol+'" onclick="sellInvest(this)">';
+                // if(i == 0){
+                // table = '<tr class="'+row[i].symbol +'" ><td>'+row[i].symbol+'</td><td id="ns'+row[i].symbol+'">'+row[i].numstocks+'</td><td id="a'+row[i].symbol + '">'+row[i].amount+'</td><td id="dollar'+row[i].symbol+'">$'+((row[i].numStocks* obj.latestPrice)-row[i].amount).toFixed(2)+'</td><td id="pre'+row[i].symbol+'">'+((((Number(row[i].numstocks)*Number(obj.latestPrice))/Number(row[i].amount))-1)*100).toFixed(2) + '%';+'</td><td>'+sell+'</td></tr>';
+                // }
+               // else{
+                    table += '<tr class="'+row.symbol +'" ><td>'+row.symbol+'</td><td id="ns'+row.symbol+'">'+row.numstocks+'</td><td id="a'+row.symbol + '">'+row.amount+'</td><td id="dollar'+row.symbol+'">$'+((row.numStocks* price)-row.amount).toFixed(2)+'</td><td id="pre'+row.symbol+'">'+((((Number(row.numstocks)*Number(price))/Number(row.amount))-1)*100).toFixed(2) + '%';+'</td><td>'+sell+'</td></tr>';
+                //}
+                
+          //  }
+            stop2 = true;
+            console.log('only once');
+            document.getElementById('iTable').innerHTML = table;
+      //  }
 }
 function removeStock(button){
     var symbol = button.className;
