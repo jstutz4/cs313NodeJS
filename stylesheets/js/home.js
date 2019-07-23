@@ -12,15 +12,14 @@ function apiSearch(symbol, callBack, investing) {
             var obj = JSON.parse(this.responseText);
             console.log(investing);
             console.log(typeof(investing));
-            callBack(obj);
 
            if(typeof(investing) === "undefined"){
             console.log('running well');
-
+            callBack(obj);
            }
            else{
             console.log('investing running')
-            //callBack(obj.latestPrice, investing);
+            callBack(obj.latestPrice, investing);
            }
         }
     }
@@ -192,7 +191,7 @@ function getInvest(obj){
                 }
             }
             if(!duplicate){
-                table += '<tr class="'+symbol +'" ><td>'+symbol+'</td><td id="ns'+symbol+'">'+numStocks+'</td><td id="a'+symbol + '">'+amount+'</td><td id="dollar'+symbol+'">$'+((numStocks* obj.latestPrice)-amount).toFixed(2)+'</td><td id="pre'+symbol+'">0.00%</td><td>'+sell+'</td></tr>';
+                table += '<tr class="'+symbol +'" ><td>'+symbol+'</td><td id="ns'+symbol+'">'+numStocks+'</td><td id="a'+symbol + '">'+amount+'</td><td id="dollar'+symbol+'">$'+((numStocks* obj.latestPrice.toFixed(2)).toFixed(3)-amount).toFixed(2)+'</td><td id="pre'+symbol+'">0.00%</td><td>'+sell+'</td></tr>';
                 document.getElementById('iTable').innerHTML = table;
             }
         }
