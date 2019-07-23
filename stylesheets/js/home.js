@@ -324,7 +324,7 @@ function getStocksTracked2(){
 //         httpRequest.send();
 // }
 
-function getStocksInvested(obj){
+function getStocksInvested(){
     //read from the data base
     var url = '/allinvestments'
     var table= "";
@@ -370,8 +370,7 @@ function getAllInvestCallback(price, row){
                 table += '<tr class="'+row.symbol +'" ><td>'+row.symbol+'</td><td id="ns'+row.symbol+'">'+row.numstocks+'</td><td id="a'+row.symbol + '">'+row.amount+'</td><td id="dollar'+row.symbol+'">$'+((row.numStocks* price)-row.amount)+'</td><td id="pre'+row.symbol+'">'+((((Number(row.numstocks)*Number(price))/Number(row.amount))-1)*100).toFixed(3) + '%';+'</td><td>'+sell+'</td></tr>';
             console.log('\nlisting info\n');
 
-            console.log(row.row);
-            console.log(row.symbol);
+            console.log(sell);
             console.log(price);
            // }
             //stop2 = true;
