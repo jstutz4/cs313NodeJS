@@ -431,7 +431,7 @@ function sellInvest(button){
 
 function runtwo(){
     //getStocksInvested();
-
+    stop2=false;
     getStocksTracked(getStocksInvested);
 }
 runtwo();
