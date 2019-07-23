@@ -338,6 +338,8 @@ function getStocksInvested(){
             console.log(this.responseText);
             var row = JSON.parse(this.responseText);
             console.log(row.length);
+            console.log("\nstarting reload investments\n")
+            console.log(row);
             if(!stop2){
             for(let i = 0; i < row.length; i++){
                 apiSearch(row[i].symbol,getAllInvestCallback,row[i])
@@ -405,7 +407,8 @@ function removeStock(button){
 
 function sellInvest(button){
     var symbol = button.className;
-
+    document.getElementById('iTable').innerHTML = "";
+    stop2 = false;
     var url = '/removeinvest?symbol=' + symbol;
     var table;
         var httpRequest = new XMLHttpRequest();
@@ -414,8 +417,6 @@ function sellInvest(button){
             
             console.log('did it work');
             console.log(this.responseText);
-            stop2 = false;
-            document.getElementById('iTable').innerHTML = "";
             getStocksInvested();
             
         }
