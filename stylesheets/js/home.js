@@ -357,7 +357,7 @@ function getAllInvestCallback(price, row){
     // console.log("we are loopuing in calback");
 
          table = document.getElementById('iTable').innerHTML;
-
+            console.log(table);
             //for(let i = 0; i < row.length; i++){
                 sell = '<input type="button" value="Sell Stock" class="'+row.symbol+'" onclick="sellInvest(this)">';
                 if(i == 0){
@@ -367,6 +367,9 @@ function getAllInvestCallback(price, row){
                else{
                     table += '<tr class="'+row.symbol +'" ><td>'+row.symbol+'</td><td id="ns'+row.symbol+'">'+row.numstocks+'</td><td id="a'+row.symbol + '">'+row.amount+'</td><td id="dollar'+row.symbol+'">$'+((row.numStocks* price)-row.amount).toFixed(2)+'</td><td id="pre'+row.symbol+'">'+((((Number(row.numstocks)*Number(price))/Number(row.amount))-1)*100).toFixed(2) + '%';+'</td><td>'+sell+'</td></tr>';
                 }
+            console.log('\n\n');
+
+            console.log(table);
                 
            // }
             stop2 = true;
