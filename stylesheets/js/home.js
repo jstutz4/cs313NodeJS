@@ -173,6 +173,7 @@ function getInvest(obj){
                         document.getElementById('ns' + symbol).innerHTML = obj2.numstocks;
                         document.getElementById('a'+ symbol).innerHTML = obj2.amount;
                         document.getElementById('dollar'+ symbol).innerHTML = ((obj2.numstocks*obj2.latestPrice)-obj2.amount).toFixed(3);
+                        console.log(typeof(obj2.latestPrice));
                         document.getElementById('pre'+ symbol).innerHTML = ((((obj2.numstocks*obj2.latestPrice)/obj2.amount)-1)*100).toFixed(3);
                         duplicate = true;
                     }
