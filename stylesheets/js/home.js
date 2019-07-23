@@ -329,6 +329,7 @@ function getStocksTracked2(){
 
 function getStocksInvested(){
     //read from the data base
+    stop2=false;
     var url = '/allinvestments'
     var table= "";
     var sell;
@@ -338,7 +339,7 @@ function getStocksInvested(){
             console.log(this.responseText);
             var row = JSON.parse(this.responseText);
             console.log(row.length);
-            console.log("\nstarting reload investments\n")
+            console.log("\nstarting reload investments\n" + stop2)
             console.log(row);
             if(!stop2){
             for(let i = 0; i < row.length; i++){
@@ -431,7 +432,6 @@ function sellInvest(button){
 
 function runtwo(){
     //getStocksInvested();
-    stop2=false;
     getStocksTracked(getStocksInvested);
 }
 runtwo();
