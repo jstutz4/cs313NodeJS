@@ -11,6 +11,7 @@ function apiSearch(symbol, callBack, investing) {
         if (this.readyState == 4 && this.status == 200) {
             var obj = JSON.parse(this.responseText);
             console.log(investing);
+            console.log(typeof(investing));
            if(investing != 'undefinded'){
                console.log('investing running')
                callBack(obj.latestPrice, investing);
