@@ -192,6 +192,7 @@ function getInvest(obj){
             }
             if(!duplicate){
                 table += '<tr class="'+symbol +'" ><td>'+symbol+'</td><td id="ns'+symbol+'">'+numStocks+'</td><td id="a'+symbol + '">'+amount+'</td><td id="dollar'+symbol+'">$'+((numStocks* obj.latestPrice.toFixed(2)).toFixed(3)-amount).toFixed(2)+'</td><td id="pre'+symbol+'">0.00%</td><td>'+sell+'</td></tr>';
+                console.log((numStocks, obj.latestPrice.toFixed(2),amount));
                 document.getElementById('iTable').innerHTML = table;
             }
         }
