@@ -10,7 +10,7 @@ function apiSearch(symbol, callBack, investing) {
     httpRequest.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             var obj = JSON.parse(this.responseText);
-            console.log(investing);
+            //console.log(investing);
             console.log(typeof(investing));
 
            if(typeof(investing) === "undefined"){
@@ -370,7 +370,7 @@ function getAllInvestCallback(price, row){
                 table += '<tr class="'+row.symbol +'" ><td>'+row.symbol+'</td><td id="ns'+row.symbol+'">'+row.numstocks+'</td><td id="a'+row.symbol + '">'+row.amount+'</td><td id="dollar'+row.symbol+'">$'+((row.numStocks* price)-row.amount).toFixed(2)+'</td><td id="pre'+row.symbol+'">'+((((Number(row.numstocks)*Number(price))/Number(row.amount))-1)*100).toFixed(2) + '%';+'</td><td>'+sell+'</td></tr>';
             console.log('\n\n');
 
-            console.log(row.symbol);
+            console.log(row);
                 
            // }
             //stop2 = true;
