@@ -417,7 +417,9 @@ function sellInvest(button){
             
             console.log('did it work');
             console.log(this.responseText);
-            getStocksInvested();
+            if(this.responseText == "we have deleted well"){
+                getStocksInvested();
+            }
             
         }
         httpRequest.open("GET", url, true);
