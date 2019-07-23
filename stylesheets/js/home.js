@@ -331,9 +331,7 @@ function getStocksInvested(){
     //read from the data base
     stop2=false;
     var url = '/allinvestments'
-    var table= "";
-    var sell;
-        var httpRequest = new XMLHttpRequest();
+    var httpRequest = new XMLHttpRequest();
 
         httpRequest.onreadystatechange = function () {
             console.log(this.responseText);
