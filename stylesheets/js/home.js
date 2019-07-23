@@ -408,7 +408,6 @@ function removeStock(button){
 
 function sellInvest(button){
     var symbol = button.className;
-    document.getElementById('iTable').innerHTML = "";
     stop2 = false;
     var url = '/removeinvest?symbol=' + symbol;
     var table;
